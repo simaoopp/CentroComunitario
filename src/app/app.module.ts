@@ -9,7 +9,6 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
-import { SlidenavbarComponent } from './slidenavbar/slidenavbar.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -22,14 +21,19 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SidenavbarComponent } from './sidenavbar/sidenavbar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    SlidenavbarComponent
+    SidenavbarComponent,
   ],
   imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     MatInputModule,
