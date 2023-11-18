@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Centro Comunitário</title>
+    <link
+      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <mat-toolbar class="mat-elevation-z8">
+    <button (click)="drawer.toggle()" mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <span><img src="../../assets/img/logo.png" style="height: 60px" /></span>
+  </mat-toolbar>
+
+  <mat-drawer-container autosize>
+    <mat-drawer #drawer opened="true" mode="side" position="start">
+      <mat-nav-list>
+        <mat-list-item>
+          <button routerLink="/dashboard" mat-button>
+            <mat-icon>home</mat-icon> Dasboard
+          </button>
+        </mat-list-item>
+        <mat-list-item>
+          <button routerLink="/faturacao" mat-button>
+            <mat-icon>money</mat-icon>Faturação
+          </button>
+        </mat-list-item>
+        <mat-list-item>
+          <button routerLink="/Perfil" mat-button>
+            <mat-icon>person</mat-icon>Perfil
+          </button>
+        </mat-list-item>
+        <mat-list-item> </mat-list-item>
+      </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div style="text-align: center; min-height: 900px">
+        <body>
+          <div class="container d-flex justify-content-center mt-5">
+            <div class="d-flex flex-row">
+              <div class="card" style="width: 18rem; margin-right: 10px">
+                <div class="card-body">
+                  <h1 class="card-title">Cozinha</h1>
+                  <p class="card-text">Faturação mensal: ...</p>
+                  <a href="#" class="btn btn-primary">Detalhes</a>
+                </div>
+              </div>
+
+              <div class="card" style="width: 18rem; margin-right: 10px">
+                <div class="card-body">
+                  <h1 class="card-title">Convivio</h1>
+                  <p class="card-text">Faturação mensal: ...</p>
+                  <a href="#" class="btn btn-primary">Detalhes</a>
+                </div>
+              </div>
+
+              <div class="card" style="width: 18rem">
+                <div class="card-body">
+                  <h1 class="card-title">Transportes</h1>
+                  <p class="card-text">Faturação mensal: ...</p>
+                  <a href="#" class="btn btn-primary">Detalhes</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="canvas">
+              <h1>Faturação Geral</h1>
+              <canvas #Canvas> </canvas>
+            </div>
+          </div>
+        </body>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</html>
