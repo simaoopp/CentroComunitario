@@ -1,0 +1,15 @@
+<div class="login-container">
+    <h2>Cozinha</h2>
+    <form>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Email" type="email" formControlName="email">
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Password" type="password" formControlName="password">
+      </mat-form-field>
+      <button mat-raised-button color="primary">Sign In</button>
+    </form>
+    <div class="separator">or</div>
+    <button mat-button (click)="closeDialog()" color="warn">Cancel</button>
+  </div>
+  
