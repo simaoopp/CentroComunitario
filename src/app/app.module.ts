@@ -33,6 +33,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { TransportesNovaFaturaComponent } from './modals/modalsNovaFatura/transportes-nova-fatura/transportes-nova-fatura.component';
+import { DatePipe } from '@angular/common';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireModule } from '@angular/fire/compat';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,12 +70,14 @@ import { TransportesNovaFaturaComponent } from './modals/modalsNovaFatura/transp
     MatBadgeModule,
     MatButtonModule,
     MatSidenavModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

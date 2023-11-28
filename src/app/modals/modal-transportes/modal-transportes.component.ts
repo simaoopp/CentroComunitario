@@ -42,8 +42,8 @@ export class ModalTransportesComponent implements AfterViewInit {
   }
 }
 export interface PeriodicElement {
-  name: string;
-  position: number;
+  Empresa: string;
+  : number;
   weight: number;
   symbol: string;
 }

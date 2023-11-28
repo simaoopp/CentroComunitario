@@ -3,14 +3,28 @@
   <div class="m-3">
     <label
       >Empresa:
-      <input type="text" class="form-control m-2" />
+      <input
+        type="text"
+        class="form-control m-2"
+        placeholder="Empresa"
+        [(ngModel)]="empresa"
+      />
+    </label>
+    <label class="m-2"
+      >Nº Fatura:
+      <input
+        type="text"
+        class="form-control m-2"
+        placeholder="Nº Fatura"
+        [(ngModel)]="Nfatura"
+      />
     </label>
     <br />
     <label
       >Data:
       <mat-form-field class="form-control m-2">
         <mat-label>Escolha uma data</mat-label>
-        <input matInput [matDatepicker]="picker" />
+        <input matInput [matDatepicker]="picker" [(ngModel)]="dataemissao" />
         <mat-datepicker-toggle
           matIconSuffix
           [for]="picker"
@@ -19,10 +33,9 @@
       </mat-form-field>
     </label>
     <br />
-    <button class="btn btn-success mt-2" (click)="transferirDados()">+</button>
 
     <div class="text-center">
-      <form [formGroup]="form" (ngSubmit)="transferirDados()">
+      <form [formGroup]="faturaForm" (ngSubmit)="getDados()">
         <table class="m-auto">
           <tr>
             <td>
@@ -44,8 +57,9 @@
                 type="text"
                 id="designacao"
                 class="form-control"
-                [(ngModel)]="designacao"
+                formControlName="designacao"
                 placeholder="Designação"
+                required
               />
             </td>
             <td>
@@ -53,56 +67,83 @@
                 type="text"
                 id="quantidade"
                 class="form-control"
-                [(ngModel)]="quantidade"
+                formControlName="quantidade"
                 placeholder="Quantidade"
+                required
               />
             </td>
             <td>
               <input
-                type="text"
+                type="number"
                 id="percentagem_iva"
                 class="form-control"
-                [(ngModel)]="percentagemIva"
+                formControlName="percentagemIva"
                 placeholder="% IVA"
+                required
               />
             </td>
             <td>
               <input
-                type="text"
+                type="number"
                 id="total_liquido"
                 class="form-control"
-                [(ngModel)]="totalIliquido"
+                formControlName="totalIliquido"
                 placeholder="Total Ilíquido"
               />
             </td>
           </tr>
         </table>
+        <button class="btn btn-success submit m-2">Adicionar</button>
       </form>
+      <h1>Valor total: {{ValorTotal}} € </h1>
+      <div class="mat-elevation-z8 m-3">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="desig">
+            <th mat-header-cell *matHeaderCellDef>Designação</th>
+            <td mat-cell *matCellDef="let element">{{ element.desig }}</td>
+          </ng-container>
 
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 m-2">
-        <ng-container matColumnDef="desig">
-          <th mat-header-cell *matHeaderCellDef>Designação</th>
-          <td mat-cell *matCellDef="let element">{{ element.desig }}</td>
-        </ng-container>
+          <ng-container matColumnDef="quanti">
+            <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+            <td mat-cell *matCellDef="let element">{{ element.quanti }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="quanti">
-          <th mat-header-cell *matHeaderCellDef>Quantidade</th>
-          <td mat-cell *matCellDef="let element">{{ element.quanti }}</td>
-        </ng-container>
+          <ng-container matColumnDef="iva">
+            <th mat-header-cell *matHeaderCellDef>% IVA</th>
+            <td mat-cell *matCellDef="let element">{{ element.iva }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="iva">
-          <th mat-header-cell *matHeaderCellDef>% IVA</th>
-          <td mat-cell *matCellDef="let element">{{ element.iva }}</td>
-        </ng-container>
+          <ng-container matColumnDef="iliquido">
+            <th mat-header-cell *matHeaderCellDef>Total Ilíquido</th>
+            <td mat-cell *matCellDef="let element">{{ element.iliquido }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="iliquido">
-          <th mat-header-cell *matHeaderCellDef>Total Ilíquido</th>
-          <td mat-cell *matCellDef="let element">{{ element.iliquido }}</td>
-        </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button class="btn btn-danger btn-sm" (click)="Remove(element)">
+                <i class='bx bx-trash'></i>
+              </button>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
     </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary m-2" (click)="submit()">
+      Salvar
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary m-2"
+      data-dismiss="modal"
+      (click)="closeDialog()"
+    >
+      Cancelar
+    </button>
   </div>
 </div>
