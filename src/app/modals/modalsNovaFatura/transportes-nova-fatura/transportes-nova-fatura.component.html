@@ -95,7 +95,7 @@
         </table>
         <button class="btn btn-success submit m-2">Adicionar</button>
       </form>
-      <h1>Valor total: {{ValorTotal}} € </h1>
+      <h1>Valor total: {{ ValorTotal }} €</h1>
       <div class="mat-elevation-z8 m-3">
         <table mat-table [dataSource]="dataSource">
           <ng-container matColumnDef="desig">
@@ -121,8 +121,12 @@
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let element">
-              <button mat-icon-button class="btn btn-danger btn-sm" (click)="Remove(element)">
-                <i class='bx bx-trash'></i>
+              <button
+                mat-icon-button
+                class="btn btn-danger btn-sm"
+                (click)="Remove(element)"
+              >
+                <i class="bx bx-trash"></i>
               </button>
             </td>
           </ng-container>

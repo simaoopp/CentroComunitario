@@ -7,11 +7,35 @@ import { AngularFireDatabase } from '@angular/fire/compat/database';
 export class RemoveService {
 
   constructor(private db: AngularFireDatabase) { }
-  TransportesREMOVE(empresa: string, numeroFatura: string) {
-    this.db.object(`/transportes/${empresa}/${numeroFatura}/`);
+  TransportesREMOVE(numeroFatura: string): Promise<void> {
+    return this.db.object(`/transportes/${numeroFatura}/`).remove();
   }
 
-  TransportesREMOVEartigo(empresa: string, numeroFatura: string) {
-    this.db.object(`/transportes/${empresa}/${numeroFatura}/`);
+  CozinhaREMOVE(numeroFatura: string): Promise<void> {
+    return this.db.object(`/cozinha/${numeroFatura}/`).remove();
+  }
+
+  HigieneREMOVE(numeroFatura: string): Promise<void> {
+    return this.db.object(`/higiene/${numeroFatura}/`).remove();
+  }
+
+  LavandariaREMOVE(numeroFatura: string): Promise<void> {
+    return this.db.object(`/lavandaria/${numeroFatura}/`).remove();
+  }
+
+  ServicoComunsREMOVE(numeroFatura: string): Promise<void> {
+    return this.db.object(`/servicoComuns/${numeroFatura}/`).remove();
+  }
+
+  ConvivioREMOVE(numeroFatura: string): Promise<void> {
+    return this.db.object(`/convivio/${numeroFatura}/`).remove();
+  }
+
+  AdministrativosREMOVE(numeroFatura: string): Promise<void> {
+    return this.db.object(`/administrativos/${numeroFatura}/`).remove();
+  }
+
+  TransportesREMOVEartigo(numeroFatura: string) {
+    this.db.object(`/transportes/${numeroFatura}/fatura/`).remove();
   }
 }

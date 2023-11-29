@@ -36,6 +36,12 @@ import { TransportesNovaFaturaComponent } from './modals/modalsNovaFatura/transp
 import { DatePipe } from '@angular/common';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireModule } from '@angular/fire/compat';
+import { CozinhaNovaFaturaComponent } from './modals/modalsNovaFatura/cozinha-nova-fatura/cozinha-nova-fatura.component';
+import { ConvivioNovaFaturaComponent } from './modals/modalsNovaFatura/convivio-nova-fatura/convivio-nova-fatura.component';
+import { ModalHigieneComponent } from './modals/modal-higiene/modal-higiene.component';
+import { ModalLavandariaComponent } from './modals/modal-lavandaria/modal-lavandaria.component';
+import { ModalServicoComunsComponent } from './modals/modal-servico-comuns/modal-servico-comuns.component';
+import { ModalAdministrativosComponent } from './modals/modal-administrativos/modal-administrativos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +52,12 @@ import { AngularFireModule } from '@angular/fire/compat';
     ModalConvivioComponent,
     ModalTransportesComponent,
     TransportesNovaFaturaComponent,
+    CozinhaNovaFaturaComponent,
+    ConvivioNovaFaturaComponent,
+    ModalHigieneComponent,
+    ModalLavandariaComponent,
+    ModalServicoComunsComponent,
+    ModalAdministrativosComponent,
   ],
   imports: [
     ReactiveFormsModule,

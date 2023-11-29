@@ -41,40 +41,124 @@
     <mat-drawer-content>
       <div style="text-align: center; min-height: 900px">
         <body>
-          <div class="container d-flex justify-content-center mt-5">
-            <div class="d-flex flex-row">
-              <div class="card" style="width: 18rem; margin-right: 10px">
-                <div class="card-body">
-                  <h1 class="card-title">Cozinha</h1>
-                  <p class="card-text">Faturação mensal: ...</p>
-                  <button (click)="openCozinhaDialog()" class="btn btn-primary">Detalhes</button>
-                </div>
-              </div>
-
-              <div class="card" style="width: 18rem; margin-right: 10px">
-                <div class="card-body">
-                  <h1 class="card-title">Convivio</h1>
-                  <p class="card-text">Faturação mensal: ...</p>
-                  <button (click)="openConvivioDialog()" class="btn btn-primary">Detalhes</button>
-
-                </div>
-              </div>
-
-              <div class="card" style="width: 18rem">
-                <div class="card-body">
-                  <h1 class="card-title">Transportes</h1>
-                  <p class="card-text">Faturação mensal: ...</p>
-                  <button (click)="openTransportesDialog()" class="btn btn-primary">Detalhes</button>
-
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="container">
             <div class="canvas">
               <h1>Faturação Geral</h1>
               <canvas #Canvas> </canvas>
             </div>
+          </div>
+
+          <div style="text-align: center; min-height: 900px">
+            <body>
+              <div class="container mt-5">
+                <div class="row justify-content-center">
+                  <div class="col-md-4 mb-4">
+                    <div class="card" style="width: 26rem">
+                      <div class="card-body">
+                        <h1 class="card-title">Cozinha</h1>
+                        <p class="card-text">Faturação mensal: ...</p>
+                        <button
+                          (click)="openCozinhaDialog()"
+                          class="btn btn-primary"
+                        >
+                          Detalhes
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 mb-4">
+                    <div class="card" style="width: 26rem">
+                      <div class="card-body">
+                        <h1 class="card-title">Convívio</h1>
+                        <p class="card-text">Faturação mensal: ...</p>
+                        <button
+                          (click)="openConvivioDialog()"
+                          class="btn btn-primary"
+                        >
+                          Detalhes
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 mb-4">
+                    <div class="card" style="width: 26rem">
+                      <div class="card-body">
+                        <h1 class="card-title">Transportes</h1>
+                        <p class="card-text">Faturação mensal: ...</p>
+                        <button
+                          (click)="openTransportesDialog()"
+                          class="btn btn-primary"
+                        >
+                          Detalhes
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 mb-4">
+                    <div class="card" style="width: 26rem">
+                      <div class="card-body">
+                        <h1 class="card-title">Administrativos</h1>
+                        <p class="card-text">Faturação mensal: ...</p>
+                        <button
+                          (click)="openAdministrativosDialog()"
+                          class="btn btn-primary"
+                        >
+                          Detalhes
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 mb-4">
+                    <div class="card" style="width: 26rem">
+                      <div class="card-body">
+                        <h1 class="card-title">Lavandaria</h1>
+                        <p class="card-text">Faturação mensal: ...</p>
+                        <button
+                          (click)="openLavandariaDialog()"
+                          class="btn btn-primary"
+                        >
+                          Detalhes
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 mb-4">
+                    <div class="card" style="width: 26rem">
+                      <div class="card-body">
+                        <h1 class="card-title">Higiene Pessoal</h1>
+                        <p class="card-text">Faturação mensal: ...</p>
+                        <button
+                          (click)="openHigienePessoalDialog()"
+                          class="btn btn-primary"
+                        >
+                          Detalhes
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 mb-4">
+                    <div class="card" style="width: 26rem">
+                      <div class="card-body">
+                        <h1 class="card-title">Serviços Comuns</h1>
+                        <p class="card-text">Faturação mensal: ...</p>
+                        <button
+                          (click)="openServicosComunsDialog()"
+                          class="btn btn-primary"
+                        >
+                          Detalhes
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </body>
           </div>
         </body>
       </div>

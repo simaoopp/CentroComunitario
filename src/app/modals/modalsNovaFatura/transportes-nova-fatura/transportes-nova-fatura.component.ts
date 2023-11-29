@@ -104,8 +104,6 @@ export class TransportesNovaFaturaComponent {
     }
   }
 
-  calculateProduct(): void {}
-
   closeDialog(): void {
     this.dialogRef.close();
   }
