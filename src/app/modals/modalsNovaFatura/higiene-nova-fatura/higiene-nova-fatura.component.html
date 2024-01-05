@@ -1,0 +1,59 @@
+<div class="higiene-container">
+    <h1 class="m-2 text-center">Higienes Pessoais - Nova Fatura</h1>
+    <div class="text-center">
+      <div class="m-3" [formGroup]="customForm">
+        <label>
+          Empresa:
+          <input
+            type="text"
+            class="form-control m-2"
+            placeholder="Empresa"
+            formControlName="empresa"
+          />
+        </label>
+        <label class="m-2">
+          Nº Fatura:
+          <input
+            type="text"
+            class="form-control m-2"
+            placeholder="Nº Fatura"
+            formControlName="Nfatura"
+          />
+        </label>
+        <br />
+        <label>
+          Data:
+          <mat-form-field class="form-control m-2">
+            <mat-label>Escolha uma data</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="dataemissao" />
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </label>
+        <br />
+    
+        <div class="m-3">
+          <input type="file" class="form-control" (change)="onFileChange($event)" formControlName="file"/>
+        </div>
+        <h1>Valor total:</h1>
+        <input
+          type="number"
+          placeholder="Valor Total"
+          class="form-control"
+          formControlName="ValorTotal"
+        />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary m-2" (click)="submit()">
+        Salvar
+      </button>
+      <button
+        type="button"
+        class="btn btn-secondary m-2"
+        data-dismiss="modal"
+        (click)="closeDialog()"
+      >
+        Cancelar
+      </button>
+    </div>

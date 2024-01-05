@@ -1,0 +1,77 @@
+<div class="NovoProduto-container">
+  <h1 class="m-2 text-center">Novo Produto</h1>
+  <div class="m-3 text-center">
+    <form [formGroup]="NewProduct" (ngSubmit)="submit()">
+    <div class="imgPhoto">
+      <input
+        type="file"
+        accept="image/*"
+        (change)="onFileChange($event)"
+        hidden
+        id="imageInput"
+      />
+      <label for="imageInput">
+        <img
+          class="rounded-circle"
+          src="{{ imageuploaded }}"
+          formControlName="img"
+          alt="Clica para adicionar uma foto"
+          width="90"
+          role="button"
+        />
+      </label>
+    </div>
+    <br />
+    <label
+      >Nome:
+      <input
+        type="text"
+        class="form-control m-2"
+        placeholder="nome"
+        formControlName="nome"
+      />
+    </label>
+    <br />
+    <label class="m-2"
+      >Tipo:
+      <br>
+      <mat-form-field>
+        <select matNativeControl required formControlName="tipo">
+          <option value="Cozinha">Cozinha</option>
+          <option value="EPI Higienes">EPI Higienes</option>
+          <option value="Despença">Despença</option>
+          <option value="Despença Alimentar">Despença Alimentar</option>
+          <option value="Refrigeração">Refrigeração</option>
+          <option value="Congelação">Congelação</option>
+          <option value="Lavandaria">Lavandaria</option>
+          <option value="Frescos">Frescos</option>
+
+
+        </select>
+      </mat-form-field>
+    </label>
+    <br>
+    <label class="m-2"
+      >Quantidade:
+      <input
+        type="number"
+        class="form-control m-2"
+        placeholder="quantidade"
+        formControlName="quantidade"
+      />
+    </label>
+</form>
+    <br>
+    <button type="button" class="btn btn-primary m-2" (click)="submit()">
+      Salvar
+    </button>
+    <button
+      type="button"
+      class="btn btn-secondary m-2"
+      data-dismiss="modal"
+      (click)="closeDialog()"
+    >
+      Cancelar
+    </button>
+  </div>
+</div>

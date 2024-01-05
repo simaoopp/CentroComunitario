@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -20,10 +20,18 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import {
+  MatDrawer,
+  MatDrawerContainer,
+  MatDrawerContent,
+  MatSidenavModule,
+} from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule,
+  provideAnimations,
+} from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FaturacaoComponent } from './faturacao/faturacao.component';
 import { ModalCozinhaComponent } from './modals/modal-cozinha/modal-cozinha.component';
@@ -42,6 +50,20 @@ import { ModalHigieneComponent } from './modals/modal-higiene/modal-higiene.comp
 import { ModalLavandariaComponent } from './modals/modal-lavandaria/modal-lavandaria.component';
 import { ModalServicoComunsComponent } from './modals/modal-servico-comuns/modal-servico-comuns.component';
 import { ModalAdministrativosComponent } from './modals/modal-administrativos/modal-administrativos.component';
+import { AdministrativosNovaFaturaComponent } from './modals/modalsNovaFatura/administrativos-nova-fatura/administrativos-nova-fatura.component';
+import { HigieneNovaFaturaComponent } from './modals/modalsNovaFatura/higiene-nova-fatura/higiene-nova-fatura.component';
+import { LavandariaNovaFaturaComponent } from './modals/modalsNovaFatura/lavandaria-nova-fatura/lavandaria-nova-fatura.component';
+import { ServicoComunsNovaFaturaComponent } from './modals/modalsNovaFatura/servico-comuns-nova-fatura/servico-comuns-nova-fatura.component';
+import { StockComponent } from './stock/stock.component';
+import { ModalNovoProdutoComponent } from './modals/modal-novo-produto/modal-novo-produto.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { ModalRecursosHumanosComponent } from './modals/modal-recursos-humanos/modal-recursos-humanos.component';
+import { RecursosHumanosNovaFaturaComponent } from './modals/modalsNovaFatura/recursos-humanos-nova-fatura/recursos-humanos-nova-fatura.component';
+import { ModalViewComponent } from './modals/modal-view/modal-view.component';
+import { AcessDeniedComponent } from './acess-denied/acess-denied.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,8 +80,20 @@ import { ModalAdministrativosComponent } from './modals/modal-administrativos/mo
     ModalLavandariaComponent,
     ModalServicoComunsComponent,
     ModalAdministrativosComponent,
+    AdministrativosNovaFaturaComponent,
+    HigieneNovaFaturaComponent,
+    LavandariaNovaFaturaComponent,
+    ServicoComunsNovaFaturaComponent,
+    StockComponent,
+    ModalNovoProdutoComponent,
+    NavbarComponent,
+    ModalRecursosHumanosComponent,
+    RecursosHumanosNovaFaturaComponent,
+    ModalViewComponent,
+    AcessDeniedComponent,
   ],
   imports: [
+    NgxExtendedPdfViewerModule,
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
@@ -83,13 +117,19 @@ import { ModalAdministrativosComponent } from './modals/modal-administrativos/mo
     MatButtonModule,
     MatSidenavModule,
     AngularFireDatabaseModule,
+    ToastrModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
-    BrowserAnimationsModule,
+    NgbModule,
   ],
-  providers: [DatePipe],
+  providers: [
+    DatePipe,
+    MatDrawer,
+    MatDrawerContainer,
+    MatDrawerContent,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

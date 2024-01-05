@@ -1,52 +1,50 @@
 /* Googlefont Poppins CDN Link */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
-.home-section{
+.home-section {
   min-height: 100vh;
 }
 
-.home-content{
+.home-content {
   text-align: center;
   justify-content: center;
   display: inline;
   border-radius: 10px;
 }
 
-.home-content .overview-boxes{
+.home-content .overview-boxes {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 20px;
   margin-bottom: 26px;
 }
-.overview-boxes .box{
+.overview-boxes .box {
   display: flex;
   align-items: center;
   justify-content: center;
   background: #fff;
   padding: 15px 14px;
   border-radius: 12px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   margin: 20px;
-  
 }
-.overview-boxes .box-topic{
+.overview-boxes .box-topic {
   font-size: 20px;
   font-weight: 500;
 }
-.home-content .box .number{
+.home-content .box .number {
   font-size: 35px;
-  margin-top: -6px;
+  margin: 10px;
   font-weight: 500;
 }
-.home-content .box .indicator{
+.home-content .box .indicator {
   align-items: center;
 }
-.home-content .box .indicator i{
-  
+.home-content .box .indicator i {
   height: 20px;
   width: 20px;
-  background: #8FDACB;
+  background: #8fdacb;
   line-height: 20px;
   text-align: center;
   border-radius: 50%;
@@ -54,13 +52,13 @@
   font-size: 20px;
   margin-right: 5px;
 }
-.box .indicator i.down{
+.box .indicator i.down {
   background: #e87d88;
 }
-.home-content .box .indicator .text{
+.home-content .box .indicator .text {
   font-size: 12px;
 }
-.home-content .box .cart{
+.home-content .box .cart {
   display: inline-block;
   font-size: 32px;
   height: 50px;
@@ -72,29 +70,29 @@
   border-radius: 12px;
   margin: -15px 0 0 6px;
 }
-.home-content .box .cart.two{
-   color: #2BD47D;
-   background: #C0F2D8;
- }
-.home-content .box .cart.three{
-   color: #ffc233;
-   background: #ffe8b3;
- }
-.home-content .box .cart.four{
-   color: #e05260;
-   background: #f7d4d7;
- }
-.home-content .total-order{
+.home-content .box .cart.two {
+  color: #2bd47d;
+  background: #c0f2d8;
+}
+.home-content .box .cart.three {
+  color: #ffc233;
+  background: #ffe8b3;
+}
+.home-content .box .cart.four {
+  color: #e05260;
+  background: #f7d4d7;
+}
+.home-content .total-order {
   font-size: 20px;
   font-weight: 500;
 }
-.home-content .tabelas-faturacao{
+.home-content .tabelas-faturacao {
   display: flex;
   justify-content: space-between;
 }
 
 /* left box */
-.home-content .tabelas-faturacao .ultimascompras{
+.home-content .tabelas-faturacao .ultimascompras {
   width: 55%;
   background: #fff;
   padding: 20px 30px;
@@ -102,37 +100,37 @@
   border-radius: 12px;
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.1);
 }
-.home-content .tabelas-faturacao .ultimascompras-details{
+.home-content .tabelas-faturacao .ultimascompras-details {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.tabelas-faturacao .box .title{
+.tabelas-faturacao .box .title {
   font-size: 24px;
   font-weight: 500;
 }
-.tabelas-faturacao .ultimascompras-details li.topic{
+.tabelas-faturacao .ultimascompras-details li.topic {
   font-size: 20px;
   font-weight: 500;
 }
-.tabelas-faturacao .ultimascompras-details li{
+.tabelas-faturacao .ultimascompras-details li {
   list-style: none;
   margin: 8px 0;
 }
-.tabelas-faturacao .ultimascompras-details li a{
+.tabelas-faturacao .ultimascompras-details li a {
   font-size: 18px;
   color: #333;
   font-size: 400;
   text-decoration: none;
 }
-.tabelas-faturacao .box .button{
+.tabelas-faturacao .box .button {
   width: 100%;
   display: flex;
   justify-content: flex-end;
 }
-.tabelas-faturacao .box .button a{
+.tabelas-faturacao .box .button a {
   color: #fff;
-  background: #0A2558;
+  background: #0a2558;
   padding: 4px 12px;
   font-size: 15px;
   font-weight: 400;
@@ -140,12 +138,12 @@
   text-decoration: none;
   transition: all 0.3s ease;
 }
-.tabelas-faturacao .box .button a:hover{
-  background:  #0d3073;
+.tabelas-faturacao .box .button a:hover {
+  background: #0d3073;
 }
 
 /* Right box */
-.home-content .tabelas-faturacao .faturacaoanual{
+.home-content .tabelas-faturacao .faturacaoanual {
   width: 35%;
   background: #fff;
   padding: 20px 30px;
@@ -153,35 +151,35 @@
   border-radius: 12px;
   box-shadow: 0 15px 20px rgba(0, 0, 0, 0.1);
 }
-.home-content .tabelas-faturacao .faturcaoanual-details{
+.home-content .tabelas-faturacao .faturcaoanual-details {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.faturcaoanual .box .title{
+.faturcaoanual .box .title {
   font-size: 24px;
   font-weight: 500;
 }
 
-.tabelas-faturacao .faturcaoanual-details li.topic{
+.tabelas-faturacao .faturcaoanual-details li.topic {
   font-size: 20px;
   font-weight: 500;
 }
 
-.tabelas-faturacao .faturcaoanual-details li{
+.tabelas-faturacao .faturcaoanual-details li {
   list-style: none;
   margin: 8px 0;
 }
 
-.tabelas-faturacao .faturcaoanual-details li a{
+.tabelas-faturacao .faturcaoanual-details li a {
   font-size: 18px;
   color: #333;
   font-size: 400;
   text-decoration: none;
 }
 .tabelas-faturacao .faturcaoanual li .product,
-.price{
+.price {
   font-size: 17px;
   font-weight: 400;
   color: #333;
@@ -192,14 +190,14 @@
   font-weight: 500;
 }
 
-.tabelas-faturacao .faturacaoanual .button{
+.tabelas-faturacao .faturacaoanual .button {
   width: 100%;
   display: flex;
   justify-content: flex-end;
 }
-.tabelas-faturacao .faturacaoanual .button a{
+.tabelas-faturacao .faturacaoanual .button a {
   color: #fff;
-  background: #0A2558;
+  background: #0a2558;
   padding: 4px 12px;
   font-size: 15px;
   font-weight: 400;
@@ -207,10 +205,9 @@
   text-decoration: none;
   transition: all 0.3s ease;
 }
-.tabelas-faturacao .faturacaoanual .button a:hover{
-  background:  #0d3073;
+.tabelas-faturacao .faturacaoanual .button a:hover {
+  background: #0d3073;
 }
-
 
 .example-spacer {
   flex: 1 1 auto;
@@ -235,11 +232,6 @@
   padding-top: 64px;
   overflow-y: auto;
 }
-.login-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .full-width {
   width: 100%;
@@ -253,4 +245,16 @@
 
 button {
   width: 100%;
+}
+
+.mat-drawer-container {
+  transition: margin-left 0.3s ease;
+}
+
+.mat-drawer.mat-drawer-side {
+  transition: width 0.3s ease;
+}
+
+.mat-drawer-content {
+  transition: margin-left 0.3s ease;
 }

@@ -1,169 +1,86 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Centro Comunitário</title>
-    <link
-      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <mat-toolbar class="mat-elevation-z8">
-    <button (click)="drawer.toggle()" mat-icon-button>
-      <mat-icon>menu</mat-icon>
-    </button>
-
-    <span><img src="../../assets/img/logo.png" style="height: 60px" /></span>
-  </mat-toolbar>
-
-  <mat-drawer-container autosize>
-    <mat-drawer #drawer opened="true" mode="side" position="start">
-      <mat-nav-list>
-        <mat-list-item>
-          <button routerLink="/dashboard" mat-button>
-            <mat-icon>home</mat-icon> Dasboard
-          </button>
-        </mat-list-item>
-        <mat-list-item>
-          <button routerLink="/faturacao" mat-button>
-            <mat-icon>money</mat-icon>Faturação
-          </button>
-        </mat-list-item>
-        <mat-list-item>
-          <button routerLink="/Perfil" mat-button>
-            <mat-icon>person</mat-icon>Perfil
-          </button>
-        </mat-list-item>
-        <mat-list-item> </mat-list-item>
-      </mat-nav-list>
-    </mat-drawer>
-    <mat-drawer-content>
-      <div style="text-align: center; min-height: 600px">
-        <body>
-          <section class="home-section">
-            <div class="home-content">
-              <div class="overview-boxes">
-                <div class="box">
-                  <div class="right-side">
-                    <div class="box-topic">Total Order</div>
-                    <div class="number">40,876</div>
-                    <div class="indicator">
-                      <i class="bx bx-up-arrow-alt"></i>
-                      <span class="text">Up from yesterday</span>
-                    </div>
-                  </div>
-                  <i class="bx bx-cart-alt cart"></i>
-                </div>
-                <div class="box">
-                  <div class="right-side">
-                    <div class="box-topic">Total Sales</div>
-                    <div class="number">38,876</div>
-                    <div class="indicator">
-                      <i class="bx bx-up-arrow-alt"></i>
-                      <span class="text">Up from yesterday</span>
-                    </div>
-                  </div>
-                  <i class="bx bxs-cart-add cart two"></i>
-                </div>
-                <div class="box">
-                  <div class="right-side">
-                    <div class="box-topic">Total Profit</div>
-                    <div class="number">$12,876</div>
-                    <div class="indicator">
-                      <i class="bx bx-up-arrow-alt"></i>
-                      <span class="text">Up from yesterday</span>
-                    </div>
-                  </div>
-                  <i class="bx bx-cart cart three"></i>
-                </div>
-                <div class="box">
-                  <div class="right-side">
-                    <div class="box-topic">Total Return</div>
-                    <div class="number">11,086</div>
-                    <div class="indicator">
-                      <i class="bx bx-down-arrow-alt down"></i>
-                      <span class="text">Down From Today</span>
-                    </div>
-                  </div>
-                  <i class="bx bxs-cart-download cart four"></i>
+<mat-drawer-container autosize>
+  <mat-drawer #drawer opened="true" mode="side" position="start">
+    <app-navbar></app-navbar>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div style="text-align: center; min-height: 900px">
+      <section class="home-section">
+        <div class="home-content">
+          <div class="overview-boxes">
+            <div class="box">
+              <div class="right-side">
+                <div class="box-topic">Total Gasto Anual</div>
+                <div class="number">{{totals. yearlyTotal | currency : "EUR" : "symbol"}}</div>
+                <div class="indicator">
                 </div>
               </div>
-
-              <div class="tabelas-faturacao">
-                <div class="ultimascompras box">
-                  <div class="title">Últimas Compra</div>
-                  <div class="ultimascompras-details">
-                    <ul class="details">
-                      <li class="topic">Data</li>
-                      <li>Janeiro</li>
-                      <li>Fevereiro</li>
-                      <li>Março</li>
-                    </ul>
-                    <ul class="details">
-                      <li class="topic">Empresa</li>
-                      <li>>Frimário</li>
-                      <li>>Luis Vicente</li>
-                      <li>Salsiçor</li>
-                    </ul>
-                    <ul class="details">
-                      <li class="topic">Montante</li>
-                      <li>$204.98</li>
-                      <li>$24.55</li>
-                      <li>$25.88</li>
-                    </ul>
-                  </div>
-                  <div class="button">
-                    <a href="#">Ver Tudo</a>
-                  </div>
-                </div>
-
-                <div class="faturacaoanual">
-                    <div class="title">Faturação Anual</div>
-                    <div class="faturcaoanual-details">
-                      <ul class="details">
-                        <li class="topic">Mês</li>
-                        <li>Janeiro</li>
-                        <li>Fevereiro</li>
-                        <li>Março</li>
-                        <li>Abril</li>
-                        <li>Maio</li>
-                        <li>Junho</li>
-                        <li>Julho</li>
-                        <li>Agosto</li>
-                        <li>Outubro</li>
-                        <li>Novembro</li>
-                        <li>Dezembro</li>
-                        <li>Julho</li>
-                      </ul>
-
-                      <ul class="details">
-                        <li class="topic">Montante</li>
-                        <li>$204.98</li>
-                        <li>$24.55</li>
-                        <li>$25.88</li>
-                        <li>$25.88</li>
-                        <li>$25.88</li>
-                        <li>$25.88</li>
-                        <li>$25.88</li>
-                        <li>$25.88</li>
-                        <li>$25.88</li>
-                        <li>$25.88</li>
-                        <li>$25.88</li>
-                        <li>$25.88</li>
-                      </ul>
-                    </div>
-
-                    <div class="button">
-                      <a href="#">Ver Tudo</a>
-                    </div>
-
-                  </div>
+            </div>
+            <div class="box">
+              <div class="right-side">
+                <div class="box-topic">Total Gasto Mensal</div>
+                <div class="number">{{totals. monthlyTotal | currency : "EUR" : "symbol"}}</div>
+                <div class="indicator">
                 </div>
               </div>
-          </section>
-        </body>
-      </div>
-    </mat-drawer-content>
-  </mat-drawer-container>
-</html>
+            </div>
+            <div class="box">
+              <div class="right-side">
+                <div class="box-topic">Total Gasto Semanal</div>
+                <div class="number">{{totals. weeklyTotal | currency : "EUR" : "symbol"}}</div>
+                <div class="indicator">
+                </div>
+              </div>
+            </div>
+            <div class="box">
+              <div class="right-side">
+                <div class="box-topic">Total Gasto Diário</div>
+                <div class="number">{{totals. dailyTotal | currency : "EUR" : "symbol"}}</div>
+                <div class="indicator">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tabelas-faturacao">
+            <div class="ultimascompras box">
+              <div class="title">Últimas Faturas</div>
+              <div class="ultimascompras-details">
+                <ul class="details">
+                  <li class="topic">Data</li>
+                  <li *ngFor="let purchase of recentFaturas">{{ purchase.data}}</li>
+                </ul>
+                <ul class="details">
+                  <li class="topic">Empresa</li>
+                  <li *ngFor="let purchase of recentFaturas">{{ purchase.empresa}}</li>
+                </ul>
+                <ul class="details">
+                  <li class="topic">Montante</li>
+                  <li *ngFor="let purchase of recentFaturas">{{ purchase.valorTotal | currency : "EUR" : "symbol" }}</li>
+                </ul>
+              </div>
+              <div class="button">
+                <a href="faturacao">Ver Tudo</a>
+              </div>
+            </div>
+
+            <div class="faturacaoanual">
+              <div class="title">Faturação Anual</div>
+              <div class="faturcaoanual-details">
+                <ul class="details">
+                  <li class="topic">Mês</li>
+                  <li *ngFor="let mes of meses">{{ mes }}</li>
+                </ul>
+            
+                <ul class="details">
+                  <li class="topic">Montante</li>
+                  <li *ngFor="let montante of totaisMensais">{{ montante | currency : "EUR" : "symbol" }}</li>
+                </ul>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

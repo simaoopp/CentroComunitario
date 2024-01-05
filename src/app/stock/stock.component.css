@@ -1,0 +1,31 @@
+.mat-drawer-container {
+  transition: margin-left 0.3s ease;
+}
+
+.mat-drawer.mat-drawer-side {
+  transition: width 0.3s ease;
+}
+
+.mat-drawer-content {
+  margin: 50px;
+  transition: margin-left 0.3s ease;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.separator {
+  margin: 16px 0;
+  font-weight: bold;
+}
+
+.card {
+  margin: 10px;
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 250px;
+}

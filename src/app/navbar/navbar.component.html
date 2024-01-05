@@ -1,0 +1,33 @@
+<mat-toolbar class="mat-elevation-z8">
+  <button (click)="drawer.toggle()" mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span><img src="../../assets/img/logo.png" style="height: 60px" /></span>
+</mat-toolbar>
+
+<mat-drawer-container autosize>
+  <mat-drawer #drawer opened="true" mode="side" position="start">
+    <mat-nav-list>
+      <mat-list-item>
+        <button routerLink="/dashboard" mat-button>
+          <mat-icon>home</mat-icon> Dasboard
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button routerLink="/faturacao" mat-button>
+          <mat-icon>money</mat-icon>Faturação
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button routerLink="/stock" mat-button>
+          <mat-icon>inbox</mat-icon>Stock
+        </button>
+      </mat-list-item>
+      <mat-list-item>
+        <button (click)="logout()" mat-button>
+          <mat-icon>exit_to_app</mat-icon>Sair
+        </button>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+</mat-drawer-container>

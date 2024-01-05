@@ -1,32 +1,14 @@
-/* Googlefont Poppins CDN Link */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-.example-spacer {
-  flex: 1 1 auto;
+.mat-drawer-container {
+  transition: margin-left 0.3s ease;
 }
 
-.mat-toolbar {
-  background-color: rgb(43, 50, 158);
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-.mat-drawer {
-  position: fixed;
-  top: 64px;
-  bottom: 0;
-  z-index: 999;
+.mat-drawer.mat-drawer-side {
+  transition: width 0.3s ease;
 }
 
 .mat-drawer-content {
-  padding-top: 64px;
-  overflow-y: auto;
-}
-.login-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 65px;
+  transition: margin-left 0.3s ease;
 }
 
 .full-width {

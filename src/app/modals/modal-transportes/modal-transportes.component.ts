@@ -13,6 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TransportesNovaFaturaComponent } from '../modalsNovaFatura/transportes-nova-fatura/transportes-nova-fatura.component';
 import { GetService } from 'src/app/services/get.service';
 import { RemoveService } from 'src/app/services/remove.service';
+import { ModalViewComponent } from '../modal-view/modal-view.component';
 
 export interface PeriodicElement {
   numeroFatura: string;
@@ -66,6 +67,17 @@ export class ModalTransportesComponent implements AfterViewInit, OnInit {
     })
     .catch((error) => {
       console.error('Error removing data from Firebase:', error);
+    });
+  }
+
+  openView(element) {
+    const dialogRef = this.dialog.open(ModalViewComponent, {
+      width: '100vh',
+      height: '80vh',
+      data: { element: element }
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
     });
   }
 

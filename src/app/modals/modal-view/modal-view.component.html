@@ -1,0 +1,33 @@
+<div class="administrativos-container">
+  <h1 class="m-2 text-center">Fatura nº {{ data.element.numeroFatura }}</h1>
+  <div class="text-center">
+    <div class="m-3">
+      <h1>
+        Empresa:
+        <label for="">{{ data.element.empresa }}</label>
+      </h1>
+      <br />
+      <h1>
+        Data:
+        <label for="">{{ data.element.data }}</label>
+      </h1>
+      <br />
+
+      <div class="m-3">
+        <ngx-extended-pdf-viewer [src]="file" style="width: 100%; height: 100vh;"></ngx-extended-pdf-viewer>
+      </div>
+      <h1>Valor total:</h1>
+      <h1>{{ data.element.valorTotal | currency : "EUR" : "symbol" }}</h1>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary m-2"
+      data-dismiss="modal"
+      (click)="closeDialog()"
+    >
+      Cancelar
+    </button>
+  </div>
+</div>

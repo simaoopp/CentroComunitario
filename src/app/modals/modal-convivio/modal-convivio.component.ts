@@ -7,6 +7,7 @@ import { RemoveService } from 'src/app/services/remove.service';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { GetService } from 'src/app/services/get.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { ModalViewComponent } from '../modal-view/modal-view.component';
 
 export interface PeriodicElement {
   numeroFatura: string;
@@ -52,7 +53,7 @@ export class ModalConvivioComponent {
   remove(element: PeriodicElement) {
     const elementKey = element.numeroFatura;
 
-    this.removeData.CozinhaREMOVE(elementKey)
+    this.removeData.ConvivioREMOVE(elementKey)
     .then(() => {
       console.log('Data removed from Firebase:', element);
       this.dataSource.data = this.dataSource.data.filter(
@@ -64,7 +65,18 @@ export class ModalConvivioComponent {
     });
   }
 
-  openTransportesDialog() {
+  openView(element) {
+    const dialogRef = this.dialog.open(ModalViewComponent, {
+      width: '100vh',
+      height: '80vh',
+      data: { element: element }
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
+
+  openConvivioDialog() {
     const dialogRef = this.dialog.open(ConvivioNovaFaturaComponent, {
       width: '100vh',
       height: '80vh',

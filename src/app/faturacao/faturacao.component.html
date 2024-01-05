@@ -1,167 +1,181 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Centro Comunitário</title>
-    <link
-      href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <mat-toolbar class="mat-elevation-z8">
-    <button (click)="drawer.toggle()" mat-icon-button>
-      <mat-icon>menu</mat-icon>
-    </button>
+<mat-drawer-container autosize>
+  <mat-drawer #drawer opened="true" mode="side" position="start">
+    <app-navbar></app-navbar>
+  </mat-drawer>
+<mat-drawer-content>
+  <div style="text-align: center; min-height: 900px">
+    <body>
+      <div class="container">
+        <div class="canvas">
+          <h1>Faturação Geral</h1>
+          <canvas #Canvas> </canvas>
+        </div>
+      </div>
 
-    <span><img src="../../assets/img/logo.png" style="height: 60px" /></span>
-  </mat-toolbar>
-
-  <mat-drawer-container autosize>
-    <mat-drawer #drawer opened="true" mode="side" position="start">
-      <mat-nav-list>
-        <mat-list-item>
-          <button routerLink="/dashboard" mat-button>
-            <mat-icon>home</mat-icon> Dasboard
-          </button>
-        </mat-list-item>
-        <mat-list-item>
-          <button routerLink="/faturacao" mat-button>
-            <mat-icon>money</mat-icon>Faturação
-          </button>
-        </mat-list-item>
-        <mat-list-item>
-          <button routerLink="/Perfil" mat-button>
-            <mat-icon>person</mat-icon>Perfil
-          </button>
-        </mat-list-item>
-        <mat-list-item> </mat-list-item>
-      </mat-nav-list>
-    </mat-drawer>
-    <mat-drawer-content>
       <div style="text-align: center; min-height: 900px">
         <body>
-          <div class="container">
-            <div class="canvas">
-              <h1>Faturação Geral</h1>
-              <canvas #Canvas> </canvas>
-            </div>
-          </div>
-
-          <div style="text-align: center; min-height: 900px">
-            <body>
-              <div class="container mt-5">
-                <div class="row justify-content-center">
-                  <div class="col-md-4 mb-4">
-                    <div class="card" style="width: 26rem">
-                      <div class="card-body">
-                        <h1 class="card-title">Cozinha</h1>
-                        <p class="card-text">Faturação mensal: ...</p>
-                        <button
-                          (click)="openCozinhaDialog()"
-                          class="btn btn-primary"
-                        >
-                          Detalhes
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4 mb-4">
-                    <div class="card" style="width: 26rem">
-                      <div class="card-body">
-                        <h1 class="card-title">Convívio</h1>
-                        <p class="card-text">Faturação mensal: ...</p>
-                        <button
-                          (click)="openConvivioDialog()"
-                          class="btn btn-primary"
-                        >
-                          Detalhes
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4 mb-4">
-                    <div class="card" style="width: 26rem">
-                      <div class="card-body">
-                        <h1 class="card-title">Transportes</h1>
-                        <p class="card-text">Faturação mensal: ...</p>
-                        <button
-                          (click)="openTransportesDialog()"
-                          class="btn btn-primary"
-                        >
-                          Detalhes
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4 mb-4">
-                    <div class="card" style="width: 26rem">
-                      <div class="card-body">
-                        <h1 class="card-title">Administrativos</h1>
-                        <p class="card-text">Faturação mensal: ...</p>
-                        <button
-                          (click)="openAdministrativosDialog()"
-                          class="btn btn-primary"
-                        >
-                          Detalhes
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4 mb-4">
-                    <div class="card" style="width: 26rem">
-                      <div class="card-body">
-                        <h1 class="card-title">Lavandaria</h1>
-                        <p class="card-text">Faturação mensal: ...</p>
-                        <button
-                          (click)="openLavandariaDialog()"
-                          class="btn btn-primary"
-                        >
-                          Detalhes
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4 mb-4">
-                    <div class="card" style="width: 26rem">
-                      <div class="card-body">
-                        <h1 class="card-title">Higiene Pessoal</h1>
-                        <p class="card-text">Faturação mensal: ...</p>
-                        <button
-                          (click)="openHigienePessoalDialog()"
-                          class="btn btn-primary"
-                        >
-                          Detalhes
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4 mb-4">
-                    <div class="card" style="width: 26rem">
-                      <div class="card-body">
-                        <h1 class="card-title">Serviços Comuns</h1>
-                        <p class="card-text">Faturação mensal: ...</p>
-                        <button
-                          (click)="openServicosComunsDialog()"
-                          class="btn btn-primary"
-                        >
-                          Detalhes
-                        </button>
-                      </div>
-                    </div>
+          <div class="container mt-5">
+            <div class="row justify-content-center">
+              <div class="col-md-4 mb-4">
+                <div class="card" style="width: 26rem">
+                  <div class="card-body">
+                    <h1 class="card-title">Cozinha</h1>
+                    <p class="card-text">
+                      Faturação mensal:
+                      {{ totalFaturacaoCozinha | currency : "EUR" : "symbol" }}
+                    </p>
+                    <button
+                      (click)="openCozinhaDialog()"
+                      class="btn btn-primary"
+                    >
+                      Detalhes
+                    </button>
                   </div>
                 </div>
               </div>
-            </body>
+
+              <div class="col-md-4 mb-4">
+                <div class="card" style="width: 26rem">
+                  <div class="card-body">
+                    <h1 class="card-title">Convívio</h1>
+                    <p class="card-text">
+                      Faturação mensal:
+                      {{ totalFaturacaoConvivio | currency : "EUR" : "symbol" }}
+                    </p>
+                    <button
+                      (click)="openConvivioDialog()"
+                      class="btn btn-primary"
+                    >
+                      Detalhes
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <div class="card" style="width: 26rem">
+                  <div class="card-body">
+                    <h1 class="card-title">Transportes</h1>
+                    <p class="card-text">
+                      Faturação mensal:{{
+                        totalFaturacaoTransportes | currency : "EUR" : "symbol"
+                      }}
+                    </p>
+                    <button
+                      (click)="openTransportesDialog()"
+                      class="btn btn-primary"
+                    >
+                      Detalhes
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <div class="card" style="width: 26rem">
+                  <div class="card-body">
+                    <h1 class="card-title">Administrativos</h1>
+                    <p class="card-text">
+                      Faturação mensal:
+                      {{
+                        totalFaturacaoAdministrativos
+                          | currency : "EUR" : "symbol"
+                      }}
+                    </p>
+                    <button
+                      (click)="openAdministrativosDialog()"
+                      class="btn btn-primary"
+                    >
+                      Detalhes
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <div class="card" style="width: 26rem">
+                  <div class="card-body">
+                    <h1 class="card-title">Lavandaria</h1>
+                    <p class="card-text">
+                      Faturação mensal:
+                      {{
+                        totalFaturacaoLavandaria | currency : "EUR" : "symbol"
+                      }}
+                    </p>
+                    <button
+                      (click)="openLavandariaDialog()"
+                      class="btn btn-primary"
+                    >
+                      Detalhes
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <div class="card" style="width: 26rem">
+                  <div class="card-body">
+                    <h1 class="card-title">Higiene Pessoal</h1>
+                    <p class="card-text">
+                      Faturação mensal:
+                      {{ totalFaturacaoHigienes | currency : "EUR" : "symbol" }}
+                    </p>
+                    <button
+                      (click)="openHigienePessoalDialog()"
+                      class="btn btn-primary"
+                    >
+                      Detalhes
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <div class="card" style="width: 26rem">
+                  <div class="card-body">
+                    <h1 class="card-title">Serviços Comuns</h1>
+                    <p class="card-text">
+                      Faturação mensal:
+                      {{
+                        totalFaturacaoServicosComuns
+                          | currency : "EUR" : "symbol"
+                      }}
+                    </p>
+                    <button
+                      (click)="openServicosComunsDialog()"
+                      class="btn btn-primary"
+                    >
+                      Detalhes
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-4">
+                <div class="card" style="width: 26rem">
+                  <div class="card-body">
+                    <h1 class="card-title">Recursos Humanos</h1>
+                    <p class="card-text">
+                      Faturação mensal:
+                      {{
+                        totalFaturacaoRecursosHumanos
+                          | currency : "EUR" : "symbol"
+                      }}
+                    </p>
+                    <button
+                      (click)="openRecursosHumanosDialog()"
+                      class="btn btn-primary"
+                    >
+                      Detalhes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </body>
       </div>
-    </mat-drawer-content>
-  </mat-drawer-container>
-</html>
+    </body>
+  </div>
+</mat-drawer-content>
+</mat-drawer-container>

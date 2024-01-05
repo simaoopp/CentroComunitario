@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { GetService } from 'src/app/services/get.service';
 import { RemoveService } from 'src/app/services/remove.service';
 import { CozinhaNovaFaturaComponent } from '../modalsNovaFatura/cozinha-nova-fatura/cozinha-nova-fatura.component';
+import { ModalViewComponent } from '../modal-view/modal-view.component';
 
 export interface PeriodicElement {
   numeroFatura: string;
@@ -50,6 +51,17 @@ export class ModalCozinhaComponent {
     });
   }
 
+  openView(element) {
+    const dialogRef = this.dialog.open(ModalViewComponent, {
+      width: '100vh',
+      height: '80vh',
+      data: { element: element }
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
+
   remove(element: PeriodicElement) {
     const elementKey = element.numeroFatura;
 
@@ -65,7 +77,7 @@ export class ModalCozinhaComponent {
     });
   }
 
-  openTransportesDialog() {
+  openCozinhaDialog() {
     const dialogRef = this.dialog.open(CozinhaNovaFaturaComponent, {
       width: '100vh',
       height: '80vh',

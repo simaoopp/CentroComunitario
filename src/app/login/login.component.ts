@@ -2,15 +2,19 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
 
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -27,16 +31,12 @@ export class LoginComponent {
 
   submit() {
     if (!this.loginForm.valid) {
-      
+      this.toastr.error( 'Tente novamente ou chame o administrador' , 'Falha no ao tentar iniciar sessão');
       return;
     }
     const { email, password } = this.loginForm.value;
-    console.log(email, password);
     this.auth.login(email, password).subscribe((res) => {
-        this.router.navigateByUrl('/dashboard');
-    }),
-      (err) => {
-        console.log(err)
-      };
+      this.router.navigateByUrl('/dashboard');
+    })
   }
 }
