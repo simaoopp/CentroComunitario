@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalLavandariaComponent } from './modal-lavandaria.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('ModalLavandariaComponent', () => {
   let component: ModalLavandariaComponent;
@@ -8,7 +9,10 @@ describe('ModalLavandariaComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ModalLavandariaComponent]
+      declarations: [ModalLavandariaComponent],
+      providers: [
+        { provide: MatDialogRef, useValue: {} } 
+      ]
     });
     fixture = TestBed.createComponent(ModalLavandariaComponent);
     component = fixture.componentInstance;

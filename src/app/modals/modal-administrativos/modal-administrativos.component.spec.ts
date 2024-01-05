@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalAdministrativosComponent } from './modal-administrativos.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('ModalAdministrativosComponent', () => {
   let component: ModalAdministrativosComponent;
@@ -8,7 +9,10 @@ describe('ModalAdministrativosComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ModalAdministrativosComponent]
+      declarations: [ModalAdministrativosComponent],
+      providers: [
+        { provide: MatDialogRef, useValue: {} } 
+      ]
     });
     fixture = TestBed.createComponent(ModalAdministrativosComponent);
     component = fixture.componentInstance;

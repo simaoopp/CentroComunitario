@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ModalRecursosHumanosComponent } from './modal-recursos-humanos.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 describe('ModalRecursosHumanosComponent', () => {
   let component: ModalRecursosHumanosComponent;
@@ -8,7 +9,10 @@ describe('ModalRecursosHumanosComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ModalRecursosHumanosComponent]
+      declarations: [ModalRecursosHumanosComponent],
+      providers: [
+        { provide: MatDialogRef, useValue: {} } 
+      ]
     });
     fixture = TestBed.createComponent(ModalRecursosHumanosComponent);
     component = fixture.componentInstance;
