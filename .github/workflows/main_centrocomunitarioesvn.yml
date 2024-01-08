@@ -53,4 +53,4 @@ jobs:
           app-name: 'centrocomunitarioesvn'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_191ABAC97221411D845F606D318DBA73 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D12D6014E10B48D6B06A2663A7310A3A }}
