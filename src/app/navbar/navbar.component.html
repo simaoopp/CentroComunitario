@@ -3,7 +3,19 @@
     <mat-icon>menu</mat-icon>
   </button>
   <span><img src="../../assets/img/logo.png" style="height: 60px" /></span>
+  
+  <!-- Spacer to push the notification button to the right -->
+  <span style="flex: 1 1 auto;"></span>
+
+  <!-- Notification Button -->
+  <button mat-icon-button>
+    <mat-icon>notifications</mat-icon>
+  </button>
 </mat-toolbar>
+
+<mat-drawer-container autosize>
+  <!-- Drawer code remains the same -->
+</mat-drawer-container>
 
 <mat-drawer-container autosize>
   <mat-drawer #drawer opened="true" mode="side" position="start">
