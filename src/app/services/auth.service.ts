@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return this.token != null;
+    return this.getToken() !== null;
   }
 
   login(username: string, password: string): Observable<void> {
