@@ -6,11 +6,13 @@ import { FaturacaoComponent } from './faturacao/faturacao.component';
 import { StockComponent } from './stock/stock.component';
 import { AuthGuard } from './guard/auth.guard';
 import { AcessDeniedComponent } from './acess-denied/acess-denied.component';
+import { FaturasComponent } from './faturas/faturas.component';
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'faturacao', component: FaturacaoComponent, canActivate: [AuthGuard]},
+  {path: 'faturas', component: FaturasComponent, canActivate: [AuthGuard]},
   {path: 'stock', component: StockComponent, canActivate: [AuthGuard]},
   {path: 'acessdenied', component: AcessDeniedComponent}
 

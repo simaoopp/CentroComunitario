@@ -218,12 +218,11 @@ export class GetService {
     return new Date(isoDateString);
   }
 
-    // Function to get daily total
     getDailyTotal(faturas) {
       const today = new Date();
-      today.setHours(0, 0, 0, 0); // Set to start of today
+      today.setHours(0, 0, 0, 0); 
       const endOfToday = new Date(today);
-      endOfToday.setDate(endOfToday.getDate() + 1); // Set to end of today
+      endOfToday.setDate(endOfToday.getDate() + 1); 
   
       return faturas.filter(fatura => {
         const faturaDate = new Date(fatura.data);
@@ -231,7 +230,6 @@ export class GetService {
       }).reduce((sum, fatura) => sum + this.parseValorTotal(fatura.valorTotal), 0);
     }
   
-    // Function to get weekly total
     getWeeklyTotal(faturas) {
       const today = new Date();
       const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
@@ -243,7 +241,6 @@ export class GetService {
       }).reduce((sum, fatura) => sum + this.parseValorTotal(fatura.valorTotal), 0);
     }
   
-    // Function to get monthly total
     getMonthlyTotal(faturas) {
       const today = new Date();
       const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -254,7 +251,6 @@ export class GetService {
       }).reduce((sum, fatura) => sum + this.parseValorTotal(fatura.valorTotal), 0);
     }
   
-    // Function to get yearly total
     getYearlyTotal(faturas) {
       const startOfYear = new Date(new Date().getFullYear(), 0, 1);
   
@@ -264,12 +260,10 @@ export class GetService {
       }).reduce((sum, fatura) => sum + this.parseValorTotal(fatura.valorTotal), 0);
     }
   
-    // Helper function to parse valorTotal to a number
     parseValorTotal(valorTotal) {
       return typeof valorTotal === 'number' ? valorTotal : parseFloat(valorTotal.replace(/,/g, ''));
     }
   
-    // Main function to retrieve all faturas and calculate totals
     getAllFaturasTotals() {
       return this.db
         .list('/FATURACAO')
@@ -285,7 +279,7 @@ export class GetService {
           });
   
           return Promise.all(promises).then((results) => {
-            const allFaturas = [].concat(...results); // Flatten the array of arrays
+            const allFaturas = [].concat(...results); 
             return {
               dailyTotal: this.getDailyTotal(allFaturas),
               weeklyTotal: this.getWeeklyTotal(allFaturas),

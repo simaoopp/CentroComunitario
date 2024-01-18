@@ -10,9 +10,13 @@
           <button class="btn btn-primary m-4" (click)="openNovoProdutoDialog()">
             Adicionar Novo Produto
           </button>
+          <div class="m2">
+            <input type="text" class="form-control" placeholder="Pesquise" [(ngModel)]="searchTerm" (input)="filterBySearchTerm()">
+          </div>
         </div>
 
         <div class="container">
+          
           <button
             class="btn btn-outline-info m-2"
             (click)="filterProducts('todos')"
@@ -65,10 +69,13 @@
         </div>
 
         <div class="container text-center">
+          <div *ngIf="!productsFound" class="container text-center">
+            <p>Não foi encontrado nenhum produto em stock.</p>
+          </div>
           <div class="row">
             <div
               class="col-md-3"
-              *ngFor="let item of produtos | async; let i = index"
+              *ngFor="let item of produtos | async; trackBy: trackByFunction"
             >
               <div class="card mb-4 text">
                 <img

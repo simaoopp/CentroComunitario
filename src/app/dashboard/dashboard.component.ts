@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { take, tap } from 'rxjs';
 import { GetService } from '../services/get.service';
+import { AddService } from '../services/add.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,6 +11,7 @@ import { GetService } from '../services/get.service';
 })
 export class DashboardComponent implements OnInit {
   totals: any = {};
+  yearlyTotal: number = 0;
   recentFaturas: any;
   totaisMensais: number[] = new Array(12).fill(0);
   meses: string[] = [
@@ -27,9 +29,10 @@ export class DashboardComponent implements OnInit {
     'Dezembro',
   ];
 
-  constructor(private db: AngularFireDatabase, private get: GetService) {}
+  constructor(private db: AngularFireDatabase, private get: GetService, private add: AddService) {}
 
   ngOnInit(): void {
+
     this.db
       .list('/FATURACAO')
       .query.once('value')
@@ -49,19 +52,19 @@ export class DashboardComponent implements OnInit {
                 }
                 return acc;
               }, []);
-
+  
               faturasPorMes.forEach((valorMensal, indiceMes) => {
                 this.totaisMensais[indiceMes] =
                   (this.totaisMensais[indiceMes] || 0) + valorMensal;
               });
+              this.add.saveMonthlyTotals(anoAtual, this.totaisMensais);
             });
         });
       });
-
       this.get.getRecentFaturas().then(recentFaturas => {
         this.recentFaturas = recentFaturas;
       });
-
+  
       this.get.getAllFaturasTotals().then(totals => {
         this.totals = totals;
       });

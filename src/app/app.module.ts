@@ -20,6 +20,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatGridListModule } from '@angular/material/grid-list';
 import {
   MatDrawer,
   MatDrawerContainer,
@@ -63,6 +64,9 @@ import { ModalViewComponent } from './modals/modal-view/modal-view.component';
 import { AcessDeniedComponent } from './acess-denied/acess-denied.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
+import { FaturasComponent } from './faturas/faturas.component';
+import { provideStorage,getStorage } from '@angular/fire/storage';
+import { NotificationDialogComponent } from './modals/notifications/notification-dialog/notification-dialog.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +95,8 @@ import { ToastrModule } from 'ngx-toastr';
     RecursosHumanosNovaFaturaComponent,
     ModalViewComponent,
     AcessDeniedComponent,
+    FaturasComponent,
+    NotificationDialogComponent,
   ],
   imports: [
     NgxExtendedPdfViewerModule,
@@ -113,6 +119,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatMenuModule,
     MatDialogModule,
     MatIconModule,
+    MatGridListModule,
     MatBadgeModule,
     MatButtonModule,
     MatSidenavModule,
@@ -123,6 +130,7 @@ import { ToastrModule } from 'ngx-toastr';
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     NgbModule,
+    provideStorage(() => getStorage()),
   ],
   providers: [
     DatePipe,

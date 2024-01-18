@@ -4,38 +4,51 @@
   </button>
   <span><img src="../../assets/img/logo.png" style="height: 60px" /></span>
   
-  <!-- Spacer to push the notification button to the right -->
   <span style="flex: 1 1 auto;"></span>
 
-  <!-- Notification Button -->
-  <button mat-icon-button>
-    <mat-icon>notifications</mat-icon>
+  <button mat-icon-button [matMenuTriggerFor]="notificationsMenu">
+    <mat-icon class="notification">notifications</mat-icon>
   </button>
+  
+  <mat-menu #notificationsMenu="matMenu">
+    <div class="notifications-dropdown">
+      <ng-container *ngFor="let notification of notifications">
+        <div class="notification-item" *ngFor="let notification of notifications" (click)="openDialog(notification)">
+          <mat-icon>{{notification.icon}}</mat-icon>
+          <span>{{notification.message}}</span>
+        </div>
+      </ng-container>
+    </div>
+  </mat-menu>
 </mat-toolbar>
 
 <mat-drawer-container autosize>
-  <!-- Drawer code remains the same -->
 </mat-drawer-container>
 
 <mat-drawer-container autosize>
   <mat-drawer #drawer opened="true" mode="side" position="start">
     <mat-nav-list>
-      <mat-list-item>
+      <mat-list-item class="left-aligned-text">
         <button routerLink="/dashboard" mat-button>
           <mat-icon>home</mat-icon> Dasboard
         </button>
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item class="left-aligned-text">
         <button routerLink="/faturacao" mat-button>
           <mat-icon>money</mat-icon>Faturação
         </button>
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item class="left-aligned-text">
+        <button routerLink="/faturas" mat-button>
+          <mat-icon>receipt</mat-icon>Faturas
+        </button>
+      </mat-list-item>
+      <mat-list-item class="left-aligned-text">
         <button routerLink="/stock" mat-button>
           <mat-icon>inbox</mat-icon>Stock
         </button>
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item class="left-aligned-text">
         <button (click)="logout()" mat-button>
           <mat-icon>exit_to_app</mat-icon>Sair
         </button>

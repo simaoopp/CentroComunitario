@@ -28,11 +28,8 @@ export class AddService {
         );
       })
       .catch((error) => {
-        this.toastr.error(
-          'Falha ao adicionar dados de Transporte',
-          'Erro!'
-        );
-        console.error("Error adding transport data: ", error);
+        this.toastr.error('Falha ao adicionar dados de Transporte', 'Erro!');
+        console.error('Error adding transport data: ', error);
       });
   }
   ConvivioADD(
@@ -43,20 +40,19 @@ export class AddService {
     file: any
   ) {
     const payload = { empresa, numeroFatura, data, valorTotal, file };
-    return this.db.object(`/FATURACAO/convivio/${numeroFatura}`).set(payload)
-    .then(() => {
-      this.toastr.success(
-        'Dados de Convivio adicionados com sucesso!',
-        'Sucesso!'
-      );
-    })
-    .catch((error) => {
-      this.toastr.error(
-        'Falha ao adicionar dados de Convivio',
-        'Erro!'
-      );
-      console.error("Error adding transport data: ", error);
-    });
+    return this.db
+      .object(`/FATURACAO/convivio/${numeroFatura}`)
+      .set(payload)
+      .then(() => {
+        this.toastr.success(
+          'Dados de Convivio adicionados com sucesso!',
+          'Sucesso!'
+        );
+      })
+      .catch((error) => {
+        this.toastr.error('Falha ao adicionar dados de Convivio', 'Erro!');
+        console.error('Error adding transport data: ', error);
+      });
   }
 
   LavandariaADD(
@@ -67,20 +63,19 @@ export class AddService {
     file: any
   ) {
     const payload = { empresa, numeroFatura, data, valorTotal, file };
-    return this.db.object(`/FATURACAO/lavandaria/${numeroFatura}`).set(payload)
-    .then(() => {
-      this.toastr.success(
-        'Dados de Lavandaria adicionados com sucesso!',
-        'Sucesso!'
-      );
-    })
-    .catch((error) => {
-      this.toastr.error(
-        'Falha ao adicionar dados de Lavandaria',
-        'Erro!'
-      );
-      console.error("Error adding transport data: ", error);
-    });
+    return this.db
+      .object(`/FATURACAO/lavandaria/${numeroFatura}`)
+      .set(payload)
+      .then(() => {
+        this.toastr.success(
+          'Dados de Lavandaria adicionados com sucesso!',
+          'Sucesso!'
+        );
+      })
+      .catch((error) => {
+        this.toastr.error('Falha ao adicionar dados de Lavandaria', 'Erro!');
+        console.error('Error adding transport data: ', error);
+      });
   }
 
   AdministrativosADD(
@@ -94,19 +89,19 @@ export class AddService {
     return this.db
       .object(`/FATURACAO/administrativos/${numeroFatura}`)
       .set(payload)
-    .then(() => {
-      this.toastr.success(
-        'Dados de Administrativos adicionados com sucesso!',
-        'Sucesso!'
-      );
-    })
-    .catch((error) => {
-      this.toastr.error(
-        'Falha ao adicionar dados de Administrativos',
-        'Erro!'
-      );
-      console.error("Error adding transport data: ", error);
-    });
+      .then(() => {
+        this.toastr.success(
+          'Dados de Administrativos adicionados com sucesso!',
+          'Sucesso!'
+        );
+      })
+      .catch((error) => {
+        this.toastr.error(
+          'Falha ao adicionar dados de Administrativos',
+          'Erro!'
+        );
+        console.error('Error adding transport data: ', error);
+      });
   }
 
   ServicoComunsADD(
@@ -120,19 +115,19 @@ export class AddService {
     return this.db
       .object(`/FATURACAO/servicoComuns/${numeroFatura}`)
       .set(payload)
-    .then(() => {
-      this.toastr.success(
-        'Dados de Serviços Comuns adicionados com sucesso!',
-        'Sucesso!'
-      );
-    })
-    .catch((error) => {
-      this.toastr.error(
-        'Falha ao adicionar dados de Serviços Comuns',
-        'Erro!'
-      );
-      console.error("Error adding transport data: ", error);
-    });
+      .then(() => {
+        this.toastr.success(
+          'Dados de Serviços Comuns adicionados com sucesso!',
+          'Sucesso!'
+        );
+      })
+      .catch((error) => {
+        this.toastr.error(
+          'Falha ao adicionar dados de Serviços Comuns',
+          'Erro!'
+        );
+        console.error('Error adding transport data: ', error);
+      });
   }
 
   HigieneADD(
@@ -143,20 +138,19 @@ export class AddService {
     file: any
   ) {
     const payload = { empresa, numeroFatura, data, valorTotal, file };
-    return this.db.object(`/FATURACAO/higiene/${numeroFatura}`).set(payload)
-    .then(() => {
-      this.toastr.success(
-        'Dados de Higiene adicionados com sucesso!',
-        'Sucesso!'
-      );
-    })
-    .catch((error) => {
-      this.toastr.error(
-        'Falha ao adicionar dados de Higiene',
-        'Erro!'
-      );
-      console.error("Error adding transport data: ", error);
-    });
+    return this.db
+      .object(`/FATURACAO/higiene/${numeroFatura}`)
+      .set(payload)
+      .then(() => {
+        this.toastr.success(
+          'Dados de Higiene adicionados com sucesso!',
+          'Sucesso!'
+        );
+      })
+      .catch((error) => {
+        this.toastr.error('Falha ao adicionar dados de Higiene', 'Erro!');
+        console.error('Error adding transport data: ', error);
+      });
   }
 
   CozinhaADD(
@@ -167,20 +161,19 @@ export class AddService {
     file: any
   ) {
     const payload = { empresa, numeroFatura, data, valorTotal, file };
-    return this.db.object(`/FATURACAO/cozinha/${numeroFatura}`).set(payload)
-    .then(() => {
-      this.toastr.success(
-        'Dados de Cozinha adicionados com sucesso!',
-        'Sucesso!'
-      );
-    })
-    .catch((error) => {
-      this.toastr.error(
-        'Falha ao adicionar dados de Cozinha',
-        'Erro!'
-      );
-      console.error("Error adding transport data: ", error);
-    });
+    return this.db
+      .object(`/FATURACAO/cozinha/${numeroFatura}`)
+      .set(payload)
+      .then(() => {
+        this.toastr.success(
+          'Dados de Cozinha adicionados com sucesso!',
+          'Sucesso!'
+        );
+      })
+      .catch((error) => {
+        this.toastr.error('Falha ao adicionar dados de Cozinha', 'Erro!');
+        console.error('Error adding transport data: ', error);
+      });
   }
 
   RecursosHumanosADD(
@@ -194,36 +187,34 @@ export class AddService {
     return this.db
       .object(`/FATURACAO/recursosHumanos/${numeroFatura}`)
       .set(payload)
-    .then(() => {
-      this.toastr.success(
-        'Dados de Recursos Humanos adicionados com sucesso!',
-        'Sucesso!'
-      );
-    })
-    .catch((error) => {
-      this.toastr.error(
-        'Falha ao adicionar dados de Recursos Humanos',
-        'Erro!'
-      );
-      console.error("Error adding transport data: ", error);
-    });
+      .then(() => {
+        this.toastr.success(
+          'Dados de Recursos Humanos adicionados com sucesso!',
+          'Sucesso!'
+        );
+      })
+      .catch((error) => {
+        this.toastr.error(
+          'Falha ao adicionar dados de Recursos Humanos',
+          'Erro!'
+        );
+        console.error('Error adding transport data: ', error);
+      });
   }
 
   NovoProdutoADD(produto: any) {
     return this.db
       .object(`/PRODUTOS/${produto.nome}`)
-      .set(Object.assign(produto)).then(() => {
+      .set(Object.assign(produto))
+      .then(() => {
         this.toastr.success(
           'Dados do novo produto adicionados com sucesso!',
           'Sucesso!'
         );
       })
       .catch((error) => {
-        this.toastr.error(
-          'Falha ao adicionar dados do novo produto',
-          'Erro!'
-        );
-        console.error("Error adding transport data: ", error);
+        this.toastr.error('Falha ao adicionar dados do novo produto', 'Erro!');
+        console.error('Error adding transport data: ', error);
       });
   }
 
@@ -231,5 +222,12 @@ export class AddService {
     this.db
       .list('/PRODUTOS')
       .update(item.nome, { quantidade: item.quantidade + 1 });
+  }
+
+  saveMonthlyTotals(year: number, monthlyTotals: number[]): void {
+    const path = `/MonthlyTotals/${year}`;
+    this.db
+      .object(path)
+      .set(monthlyTotals)
   }
 }

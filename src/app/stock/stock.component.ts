@@ -23,7 +23,11 @@ interface Product {
 export class StockComponent implements OnInit {
   produtos: Observable<any[]>;
 
+  productsFound: boolean = true;
+
   valorQuantidade: number;
+
+  searchTerm: string = '';
 
   constructor(
     public dialog: MatDialog,
@@ -38,6 +42,10 @@ export class StockComponent implements OnInit {
 
   Produtos() {
     this.produtos = this.get.getProdutos();
+  }
+
+  trackByFunction(index, item) {
+    return item.nome; 
   }
 
   addQuantidade(item: any) {
@@ -72,5 +80,16 @@ export class StockComponent implements OnInit {
           )
         );
     }
+  }
+  filterBySearchTerm() {
+    this.produtos = this.get.getProdutos().pipe(
+      map((products: Product[]) => {
+        const filtered = products.filter((product) =>
+          product.nome.toLowerCase().includes(this.searchTerm.toLowerCase())
+        );
+        this.productsFound = filtered.length > 0;
+        return filtered;
+      })
+    );
   }
 }

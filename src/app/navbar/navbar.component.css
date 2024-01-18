@@ -17,10 +17,10 @@
     padding-top: 64px;
     overflow-y: auto;
   }
-  .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+  .left-aligned-text button{
+    text-align: left;
+    justify-content: flex-start;
   }
   
   .full-width {
@@ -35,4 +35,18 @@
   
   button {
     width: 100%;
+  }
+
+  .notification {
+    color: white;
+  }
+
+  .notifications-dropdown {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .notification-item {
+    display: flex;
+    align-items: center;
   }
