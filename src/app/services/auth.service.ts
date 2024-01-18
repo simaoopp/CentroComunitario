@@ -27,11 +27,15 @@ export class AuthService {
   }
 
   storeToken(token: string): void {
-    this.token = token;
+    sessionStorage.setItem('authToken', token);
   }
-
+  
   getToken(): string | null {
-    return this.token;
+    return sessionStorage.getItem('authToken');
+  }
+  
+  clearToken(): void {
+    sessionStorage.removeItem('authToken');
   }
 
   isLoggedIn(): boolean {
@@ -57,9 +61,5 @@ export class AuthService {
     await this.auth.signOut();
     this.clearToken();
     this.router.navigate(['/']);
-  }
-
-  clearToken(): void {
-    this.token = null;
   }
 }
