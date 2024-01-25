@@ -214,79 +214,107 @@ export class GetService {
   }
 
   private parseDateString(dateString: string): Date {
+    if (!dateString) {
+      return new Date();
+    }
+
     const isoDateString = dateString.replace(/\//g, '-');
     return new Date(isoDateString);
   }
 
-    getDailyTotal(faturas) {
-      const today = new Date();
-      today.setHours(0, 0, 0, 0); 
-      const endOfToday = new Date(today);
-      endOfToday.setDate(endOfToday.getDate() + 1); 
-  
-      return faturas.filter(fatura => {
+  getDailyTotal(faturas) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const endOfToday = new Date(today);
+    endOfToday.setDate(endOfToday.getDate() + 1);
+
+    return faturas
+      .filter((fatura) => {
         const faturaDate = new Date(fatura.data);
         return faturaDate >= today && faturaDate < endOfToday;
-      }).reduce((sum, fatura) => sum + this.parseValorTotal(fatura.valorTotal), 0);
-    }
-  
-    getWeeklyTotal(faturas) {
-      const today = new Date();
-      const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
-      startOfWeek.setHours(0, 0, 0, 0);
-  
-      return faturas.filter(fatura => {
+      })
+      .reduce(
+        (sum, fatura) => sum + this.parseValorTotal(fatura.valorTotal),
+        0
+      );
+  }
+
+  getWeeklyTotal(faturas) {
+    const today = new Date();
+    const startOfWeek = new Date(
+      today.setDate(today.getDate() - today.getDay())
+    );
+    startOfWeek.setHours(0, 0, 0, 0);
+
+    return faturas
+      .filter((fatura) => {
         const faturaDate = new Date(fatura.data);
         return faturaDate >= startOfWeek && faturaDate < new Date();
-      }).reduce((sum, fatura) => sum + this.parseValorTotal(fatura.valorTotal), 0);
-    }
-  
-    getMonthlyTotal(faturas) {
-      const today = new Date();
-      const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-  
-      return faturas.filter(fatura => {
+      })
+      .reduce(
+        (sum, fatura) => sum + this.parseValorTotal(fatura.valorTotal),
+        0
+      );
+  }
+
+  getMonthlyTotal(faturas) {
+    const today = new Date();
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+
+    return faturas
+      .filter((fatura) => {
         const faturaDate = new Date(fatura.data);
         return faturaDate >= startOfMonth && faturaDate < new Date();
-      }).reduce((sum, fatura) => sum + this.parseValorTotal(fatura.valorTotal), 0);
-    }
-  
-    getYearlyTotal(faturas) {
-      const startOfYear = new Date(new Date().getFullYear(), 0, 1);
-  
-      return faturas.filter(fatura => {
+      })
+      .reduce(
+        (sum, fatura) => sum + this.parseValorTotal(fatura.valorTotal),
+        0
+      );
+  }
+
+  getYearlyTotal(faturas) {
+    const startOfYear = new Date(new Date().getFullYear(), 0, 1);
+
+    return faturas
+      .filter((fatura) => {
         const faturaDate = new Date(fatura.data);
         return faturaDate >= startOfYear;
-      }).reduce((sum, fatura) => sum + this.parseValorTotal(fatura.valorTotal), 0);
-    }
-  
-    parseValorTotal(valorTotal) {
-      return typeof valorTotal === 'number' ? valorTotal : parseFloat(valorTotal.replace(/,/g, ''));
-    }
-  
-    getAllFaturasTotals() {
-      return this.db
-        .list('/FATURACAO')
-        .query.once('value')
-        .then((snapshot) => {
-          const tabelas = Object.keys(snapshot.val() || {});
-          const promises = tabelas.map((tabela) => {
-            return this.db
-              .list(`/FATURACAO/${tabela}`)
-              .valueChanges()
-              .pipe(take(1))
-              .toPromise();
-          });
-  
-          return Promise.all(promises).then((results) => {
-            const allFaturas = [].concat(...results); 
-            return {
-              dailyTotal: this.getDailyTotal(allFaturas),
-              weeklyTotal: this.getWeeklyTotal(allFaturas),
-              monthlyTotal: this.getMonthlyTotal(allFaturas),
-              yearlyTotal: this.getYearlyTotal(allFaturas)
-            };
-          });
-        });
-    }
+      })
+      .reduce(
+        (sum, fatura) => sum + this.parseValorTotal(fatura.valorTotal),
+        0
+      );
   }
+
+  parseValorTotal(valorTotal) {
+    return typeof valorTotal === 'number'
+      ? valorTotal
+      : parseFloat(valorTotal.replace(/,/g, ''));
+  }
+
+  getAllFaturasTotals() {
+    return this.db
+      .list('/FATURACAO')
+      .query.once('value')
+      .then((snapshot) => {
+        const tabelas = Object.keys(snapshot.val() || {});
+        const promises = tabelas.map((tabela) => {
+          return this.db
+            .list(`/FATURACAO/${tabela}`)
+            .valueChanges()
+            .pipe(take(1))
+            .toPromise();
+        });
+
+        return Promise.all(promises).then((results) => {
+          const allFaturas = [].concat(...results);
+          return {
+            dailyTotal: this.getDailyTotal(allFaturas),
+            weeklyTotal: this.getWeeklyTotal(allFaturas),
+            monthlyTotal: this.getMonthlyTotal(allFaturas),
+            yearlyTotal: this.getYearlyTotal(allFaturas),
+          };
+        });
+      });
+  }
+}
