@@ -15,72 +15,89 @@ import { GetService } from 'src/app/services/get.service';
 import { RemoveService } from 'src/app/services/remove.service';
 import { LavandariaNovaFaturaComponent } from '../modalsNovaFatura/lavandaria-nova-fatura/lavandaria-nova-fatura.component';
 import { ModalViewComponent } from '../modal-view/modal-view.component';
+import { ToastrService } from 'ngx-toastr';
 
 export interface PeriodicElement {
+  id: number;
   numeroFatura: string;
   data: string;
   empresa: string;
   valorTotal: number;
 }
 
-
 @Component({
   selector: 'app-modal-lavandaria',
   templateUrl: './modal-lavandaria.component.html',
-  styleUrls: ['./modal-lavandaria.component.css']
+  styleUrls: ['./modal-lavandaria.component.css'],
 })
 export class ModalLavandariaComponent {
   displayedColumns: string[] = ['data', 'empresa', 'valorTotal', 'Action'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
+  faturacaoData: any;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
+    private toastr: ToastrService,
     private removeData: RemoveService,
     private _liveAnnouncer: LiveAnnouncer,
     public dialog: MatDialog,
     private get: GetService
   ) {}
-  ngOnInit(): void {
-    this.get.getFaturacaoLavandaria().subscribe((data) => {
-      this.dataSource.data = [];
-
-      const dataArray = Object.values(data);
-
-      if (Array.isArray(dataArray)) {
-        this.dataSource.data.push(...dataArray);
-        this.dataSource.data = this.dataSource.data.slice();
-      } else {
-        console.error('Data is not an array:', data);
-      }
-    });
-  }
 
   remove(element: PeriodicElement) {
-    const elementKey = element.numeroFatura;
+    const elementFatura = element.numeroFatura;
+    const elementKey = element.id;
+    this.removeData.deleteFaturacao(elementFatura, elementKey).subscribe(
+      () => {
+        this.toastr.success('Fatura eliminada com sucesso!', 'Sucesso');
+        this.dataSource.data = this.dataSource.data.filter(
+          (item) => item !== element
+        );
+      },
+      (error) => {
+        console.error('Error removing data from the backend:', error);
+      }
+    );
+  }
 
-    this.removeData.LavandariaREMOVE(elementKey)
-    .then(() => {
-      console.log('Data removed from Firebase:', element);
-      this.dataSource.data = this.dataSource.data.filter(
-        (item) => item !== element
-      );
-    })
-    .catch((error) => {
-      console.error('Error removing data from Firebase:', error);
-    });
+  ngOnInit(): void {
+    this.fetchFaturacaoData();
+  }
+
+  fetchFaturacaoData(): void {
+    this.get.getFaturacao().subscribe(
+      (data) => {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth() + 1;
+        const currentYear = currentDate.getFullYear();
+  
+        this.faturacaoData = data.filter((item) => {
+          const itemDate = new Date(item.data);
+          const itemMonth = itemDate.getMonth() + 1;
+          const itemYear = itemDate.getFullYear();
+  
+          return itemMonth === currentMonth && itemYear === currentYear && item.categoria === 'lavandaria';
+        });
+  
+        this.dataSource.data = this.faturacaoData || [];
+      },
+      (error) => {
+        console.error('Error fetching Faturacao Data:', error);
+      }
+    );
   }
 
   openView(element) {
     const dialogRef = this.dialog.open(ModalViewComponent, {
       width: '100vh',
       height: '80vh',
-      data: { element: element }
+      data: { element: element },
     });
-  
-    dialogRef.afterClosed().subscribe((result) => {
-    });
+
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   openLavandariaDialog() {

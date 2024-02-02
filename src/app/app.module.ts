@@ -64,10 +64,10 @@ import { ModalViewComponent } from './modals/modal-view/modal-view.component';
 import { AcessDeniedComponent } from './acess-denied/acess-denied.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 import { FaturasComponent } from './faturas/faturas.component';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { NotificationDialogComponent } from './modals/notifications/notification-dialog/notification-dialog.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,6 +99,7 @@ import { NotificationDialogComponent } from './modals/notifications/notification
     NotificationDialogComponent,
   ],
   imports: [
+    HttpClientModule,
     NgxExtendedPdfViewerModule,
     ReactiveFormsModule,
     FormsModule,

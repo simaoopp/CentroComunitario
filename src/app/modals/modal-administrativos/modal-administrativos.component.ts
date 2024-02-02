@@ -14,8 +14,10 @@ import { GetService } from 'src/app/services/get.service';
 import { RemoveService } from 'src/app/services/remove.service';
 import { AdministrativosNovaFaturaComponent } from '../modalsNovaFatura/administrativos-nova-fatura/administrativos-nova-fatura.component';
 import { ModalViewComponent } from '../modal-view/modal-view.component';
+import { ToastrService } from 'ngx-toastr';
 
 export interface PeriodicElement {
+  id: number;
   numeroFatura: string;
   data: string;
   empresa: string;
@@ -25,61 +27,76 @@ export interface PeriodicElement {
 @Component({
   selector: 'app-modal-administrativos',
   templateUrl: './modal-administrativos.component.html',
-  styleUrls: ['./modal-administrativos.component.css']
+  styleUrls: ['./modal-administrativos.component.css'],
 })
 export class ModalAdministrativosComponent {
-
   displayedColumns: string[] = ['data', 'empresa', 'valorTotal', 'Action'];
   dataSource = new MatTableDataSource<PeriodicElement>();
+
+  faturacaoData: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
+    private toastr: ToastrService,
     private removeData: RemoveService,
     private _liveAnnouncer: LiveAnnouncer,
     public dialog: MatDialog,
     private get: GetService
   ) {}
-  ngOnInit(): void {
-    this.get.getFaturacaoAdministrativos().subscribe((data) => {
-      this.dataSource.data = [];
-
-      const dataArray = Object.values(data);
-
-      if (Array.isArray(dataArray)) {
-        this.dataSource.data.push(...dataArray);
-        this.dataSource.data = this.dataSource.data.slice();
-      } else {
-        console.error('Data is not an array:', data);
-      }
-    });
-  }
 
   remove(element: PeriodicElement) {
-    const elementKey = element.numeroFatura;
+    const elementFatura = element.numeroFatura;
+    const elementKey = element.id;
+    this.removeData.deleteFaturacao(elementFatura, elementKey).subscribe(
+      () => {
+        this.toastr.success('Fatura eliminada com sucesso!', 'Sucesso');
+        this.dataSource.data = this.dataSource.data.filter(
+          (item) => item !== element
+        );
+      },
+      (error) => {
+        console.error('Error removing data from the backend:', error);
+      }
+    );
+  }
 
-    this.removeData.AdministrativosREMOVE(elementKey)
-    .then(() => {
-      console.log('Data removed from Firebase:', element);
-      this.dataSource.data = this.dataSource.data.filter(
-        (item) => item !== element
-      );
-    })
-    .catch((error) => {
-      console.error('Error removing data from Firebase:', error);
-    });
+  ngOnInit(): void {
+    this.fetchFaturacaoData();
+  }
+
+  fetchFaturacaoData(): void {
+    this.get.getFaturacao().subscribe(
+      (data) => {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth() + 1;
+        const currentYear = currentDate.getFullYear();
+  
+        this.faturacaoData = data.filter((item) => {
+          const itemDate = new Date(item.data);
+          const itemMonth = itemDate.getMonth() + 1;
+          const itemYear = itemDate.getFullYear();
+  
+          return itemMonth === currentMonth && itemYear === currentYear && item.categoria === 'administrativos';
+        });
+  
+        this.dataSource.data = this.faturacaoData || [];
+      },
+      (error) => {
+        console.error('Error fetching Faturacao Data:', error);
+      }
+    );
   }
 
   openView(element) {
     const dialogRef = this.dialog.open(ModalViewComponent, {
       width: '100vh',
       height: '80vh',
-      data: { element: element }
+      data: { element: element },
     });
-  
-    dialogRef.afterClosed().subscribe((result) => {
-    });
+
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   openAdministrativosDialog() {
@@ -101,5 +118,4 @@ export class ModalAdministrativosComponent {
       this._liveAnnouncer.announce('Sorting cleared');
     }
   }
-
 }

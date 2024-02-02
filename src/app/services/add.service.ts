@@ -3,203 +3,37 @@ import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { object } from '@angular/fire/database';
 import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AddService {
-  constructor(private db: AngularFireDatabase, private toastr: ToastrService) {}
+  private apiUrl = 'http://localhost:3000/api/faturacao/add';
 
-  TransportesADD(
-    empresa: string,
-    numeroFatura: string,
-    data: any,
-    valorTotal: any,
-    file: any
-  ) {
-    const payload = { empresa, numeroFatura, data, valorTotal, file };
-    return this.db
-      .object(`/FATURACAO/transportes/${numeroFatura}`)
-      .set(payload)
-      .then(() => {
-        this.toastr.success(
-          'Dados de Transporte adicionados com sucesso!',
-          'Sucesso!'
-        );
-      })
-      .catch((error) => {
-        this.toastr.error('Falha ao adicionar dados de Transporte', 'Erro!');
-        console.error('Error adding transport data: ', error);
-      });
-  }
-  ConvivioADD(
-    empresa: string,
-    numeroFatura: string,
-    data: any,
-    valorTotal: any,
-    file: any
-  ) {
-    const payload = { empresa, numeroFatura, data, valorTotal, file };
-    return this.db
-      .object(`/FATURACAO/convivio/${numeroFatura}`)
-      .set(payload)
-      .then(() => {
-        this.toastr.success(
-          'Dados de Convivio adicionados com sucesso!',
-          'Sucesso!'
-        );
-      })
-      .catch((error) => {
-        this.toastr.error('Falha ao adicionar dados de Convivio', 'Erro!');
-        console.error('Error adding transport data: ', error);
-      });
-  }
+  constructor(
+    private db: AngularFireDatabase,
+    private toastr: ToastrService,
+    private http: HttpClient
+  ) {}
 
-  LavandariaADD(
+  ADD(
     empresa: string,
     numeroFatura: string,
     data: any,
+    categoria: string,
     valorTotal: any,
     file: any
   ) {
-    const payload = { empresa, numeroFatura, data, valorTotal, file };
-    return this.db
-      .object(`/FATURACAO/lavandaria/${numeroFatura}`)
-      .set(payload)
-      .then(() => {
-        this.toastr.success(
-          'Dados de Lavandaria adicionados com sucesso!',
-          'Sucesso!'
-        );
-      })
-      .catch((error) => {
-        this.toastr.error('Falha ao adicionar dados de Lavandaria', 'Erro!');
-        console.error('Error adding transport data: ', error);
-      });
-  }
-
-  AdministrativosADD(
-    empresa: string,
-    numeroFatura: string,
-    data: any,
-    valorTotal: any,
-    file: any
-  ) {
-    const payload = { empresa, numeroFatura, data, valorTotal, file };
-    return this.db
-      .object(`/FATURACAO/administrativos/${numeroFatura}`)
-      .set(payload)
-      .then(() => {
-        this.toastr.success(
-          'Dados de Administrativos adicionados com sucesso!',
-          'Sucesso!'
-        );
-      })
-      .catch((error) => {
-        this.toastr.error(
-          'Falha ao adicionar dados de Administrativos',
-          'Erro!'
-        );
-        console.error('Error adding transport data: ', error);
-      });
-  }
-
-  ServicoComunsADD(
-    empresa: string,
-    numeroFatura: string,
-    data: any,
-    valorTotal: any,
-    file: any
-  ) {
-    const payload = { empresa, numeroFatura, data, valorTotal, file };
-    return this.db
-      .object(`/FATURACAO/servicoComuns/${numeroFatura}`)
-      .set(payload)
-      .then(() => {
-        this.toastr.success(
-          'Dados de Serviços Comuns adicionados com sucesso!',
-          'Sucesso!'
-        );
-      })
-      .catch((error) => {
-        this.toastr.error(
-          'Falha ao adicionar dados de Serviços Comuns',
-          'Erro!'
-        );
-        console.error('Error adding transport data: ', error);
-      });
-  }
-
-  HigieneADD(
-    empresa: string,
-    numeroFatura: string,
-    data: any,
-    valorTotal: any,
-    file: any
-  ) {
-    const payload = { empresa, numeroFatura, data, valorTotal, file };
-    return this.db
-      .object(`/FATURACAO/higiene/${numeroFatura}`)
-      .set(payload)
-      .then(() => {
-        this.toastr.success(
-          'Dados de Higiene adicionados com sucesso!',
-          'Sucesso!'
-        );
-      })
-      .catch((error) => {
-        this.toastr.error('Falha ao adicionar dados de Higiene', 'Erro!');
-        console.error('Error adding transport data: ', error);
-      });
-  }
-
-  CozinhaADD(
-    empresa: string,
-    numeroFatura: string,
-    data: any,
-    valorTotal: any,
-    file: any
-  ) {
-    const payload = { empresa, numeroFatura, data, valorTotal, file };
-    return this.db
-      .object(`/FATURACAO/cozinha/${numeroFatura}`)
-      .set(payload)
-      .then(() => {
-        this.toastr.success(
-          'Dados de Cozinha adicionados com sucesso!',
-          'Sucesso!'
-        );
-      })
-      .catch((error) => {
-        this.toastr.error('Falha ao adicionar dados de Cozinha', 'Erro!');
-        console.error('Error adding transport data: ', error);
-      });
-  }
-
-  RecursosHumanosADD(
-    empresa: string,
-    numeroFatura: string,
-    data: any,
-    valorTotal: any,
-    file: any
-  ) {
-    const payload = { empresa, numeroFatura, data, valorTotal, file };
-    return this.db
-      .object(`/FATURACAO/recursosHumanos/${numeroFatura}`)
-      .set(payload)
-      .then(() => {
-        this.toastr.success(
-          'Dados de Recursos Humanos adicionados com sucesso!',
-          'Sucesso!'
-        );
-      })
-      .catch((error) => {
-        this.toastr.error(
-          'Falha ao adicionar dados de Recursos Humanos',
-          'Erro!'
-        );
-        console.error('Error adding transport data: ', error);
-      });
+    const payload = {
+      empresa,
+      numeroFatura,
+      data,
+      categoria,
+      valorTotal,
+      file,
+    };
+    return this.http.post<any>(this.apiUrl, payload);
   }
 
   NovoProdutoADD(produto: any) {
@@ -226,8 +60,6 @@ export class AddService {
 
   saveMonthlyTotals(year: number, monthlyTotals: number[]): void {
     const path = `/MonthlyTotals/${year}`;
-    this.db
-      .object(path)
-      .set(monthlyTotals)
+    this.db.object(path).set(monthlyTotals);
   }
 }

@@ -65,19 +65,33 @@ export class LavandariaNovaFaturaComponent {
     }
 
     const dateFormatted = this.DatePipe.transform(this.customForm.get('dataemissao')?.value, 'yyyy/MM/dd');
-    
-    this.add.LavandariaADD(
+    const categoria = 'lavandaria';
+
+    this.add.ADD(
       this.customForm.get('empresa')?.value,
       this.customForm.get('Nfatura')?.value,
       dateFormatted,
+      categoria,
       this.customForm.get('ValorTotal')?.value,
       this.customForm.get('file')?.value
-    ).then(() => {
-      this.dialogRef.close();
-    }).catch((error) => {
-      this.toastr.error('Ocorreu um erro durante a submissão.', 'Erro!');
-    }).finally(() => {
-      this.isSubmitting = false; 
-    });
+    ).subscribe(
+      () => {
+        // Success
+        this.dialogRef.close();
+        this.toastr.success(
+          'Dados de Convivio adicionados com sucesso!',
+          'Sucesso!'
+        );
+      },
+      (error) => {
+        // Error
+        this.toastr.error('Ocorreu um erro durante a submissão.', 'Erro!');
+        console.error('Error adding transport data: ', error);
+      },
+      () => {
+        // Finally
+        this.isSubmitting = false;
+      }
+    );
   }
 }

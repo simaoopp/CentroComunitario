@@ -32,35 +32,21 @@ export class DashboardComponent implements OnInit {
   constructor(private db: AngularFireDatabase, private get: GetService, private add: AddService) {}
 
   ngOnInit(): void {
+    
+    const currentYear = new Date().getFullYear();
+    this.get.getFaturacao().subscribe((faturas: any[]) => {
+      const totaisMensais = new Array(12).fill(0);
 
-    this.db
-      .list('/FATURACAO')
-      .query.once('value')
-      .then((snapshot) => {
-        const tabelas = Object.keys(snapshot.val());
-        tabelas.forEach((tabela) => {
-          this.db
-            .list(`/FATURACAO/${tabela}`)
-            .valueChanges()
-            .subscribe((faturas: any[]) => {
-              const anoAtual = new Date().getFullYear();
-              const faturasPorMes = faturas.reduce((acc, fatura) => {
-                const data = new Date(fatura.data);
-                if (data.getFullYear() === anoAtual) {
-                  const mes = data.getMonth();
-                  acc[mes] = (acc[mes] || 0) + fatura.valorTotal;
-                }
-                return acc;
-              }, []);
-  
-              faturasPorMes.forEach((valorMensal, indiceMes) => {
-                this.totaisMensais[indiceMes] =
-                  (this.totaisMensais[indiceMes] || 0) + valorMensal;
-              });
-              this.add.saveMonthlyTotals(anoAtual, this.totaisMensais);
-            });
-        });
+      faturas.forEach((fatura) => {
+        const data = new Date(fatura.data);
+        const anoAtual = data.getFullYear();
+
+        if (anoAtual === currentYear) {
+          const mes = data.getMonth();
+          totaisMensais[mes] += parseFloat(fatura.valorTotal);
+        }
       });
+    });
       this.get.getRecentFaturas().then(recentFaturas => {
         this.recentFaturas = recentFaturas;
       });

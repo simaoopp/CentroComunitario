@@ -102,58 +102,66 @@ export class FaturacaoComponent implements OnInit {
   }
 
   calcularTotalFaturacaoCozinha() {
+    const categoria: string = 'cozinha';
     this.get
-      .getFaturacaoTotalMensalCozinha(this.mesAtual, this.anoAtual)
+      .getFaturacaoTotalMensal(this.mesAtual, this.anoAtual, categoria)
       .subscribe((total) => {
         this.totalFaturacaoCozinha = total;
       });
   }
 
   calcularTotalFaturacaoConvivio() {
+    const categoria: string = 'convivio';
     this.get
-      .getFaturacaoTotalMensalConvivio(this.mesAtual, this.anoAtual)
+      .getFaturacaoTotalMensal(this.mesAtual, this.anoAtual, categoria)
       .subscribe((total) => {
         this.totalFaturacaoConvivio = total;
       });
   }
   calcularTotalFaturacaoTransportes() {
+    const categoria: string = 'transportes';
     this.get
-      .getFaturacaoTotalMensalTransportes(this.mesAtual, this.anoAtual)
+      .getFaturacaoTotalMensal(this.mesAtual, this.anoAtual, categoria)
       .subscribe((total) => {
         this.totalFaturacaoTransportes = total;
       });
   }
   calcularTotalFaturacaoAdministrativos() {
+    const categoria: string = 'administrativos';
     this.get
-      .getFaturacaoTotalMensalAdministrivos(this.mesAtual, this.anoAtual)
+      .getFaturacaoTotalMensal(this.mesAtual, this.anoAtual, categoria)
       .subscribe((total) => {
         this.totalFaturacaoAdministrativos = total;
       });
   }
   calcularTotalFaturacaoHigienes() {
+    const categoria: string = 'higiene';
     this.get
-      .getFaturacaoTotalMensalHigienes(this.mesAtual, this.anoAtual)
+      .getFaturacaoTotalMensal(this.mesAtual, this.anoAtual, categoria)
       .subscribe((total) => {
         this.totalFaturacaoHigienes = total;
       });
   }
   calcularTotalFaturacaoServicosComuns() {
+    const categoria: string = 'servicosComuns';
     this.get
-      .getFaturacaoTotalMensalServicosComuns(this.mesAtual, this.anoAtual)
+      .getFaturacaoTotalMensal(this.mesAtual, this.anoAtual, categoria)
       .subscribe((total) => {
         this.totalFaturacaoServicosComuns = total;
       });
   }
   calcularTotalFaturacaoLavandaria() {
+    const categoria: string = 'lavandaria';
     this.get
-      .getFaturacaoTotalMensalLavandaria(this.mesAtual, this.anoAtual)
+      .getFaturacaoTotalMensal(this.mesAtual, this.anoAtual, categoria)
       .subscribe((total) => {
         this.totalFaturacaoLavandaria = total;
       });
   }
   calcularTotalFaturacaoRecursosHumanos() {
+    const categoria: string = 'recursosHumanos';
     this.get
-      .getFaturacaoTotalMensalRecursosHumanos(this.mesAtual, this.anoAtual)
+      .getFaturacaoTotalMensal(this.mesAtual, this.anoAtual, categoria)
       .subscribe((total) => {
         this.totalFaturacaoRecursosHumanos = total;
       });
@@ -180,7 +188,9 @@ export class FaturacaoComponent implements OnInit {
         datasets: [
           {
             label: 'Faturação Mensal Consolidada',
-            data: totaisMensais.map(value => typeof value === 'string' ? parseFloat(value) : value),
+            data: totaisMensais.map((value) =>
+              typeof value === 'string' ? parseFloat(value) : value
+            ),
           },
         ],
       },
@@ -188,68 +198,57 @@ export class FaturacaoComponent implements OnInit {
         plugins: {
           tooltip: {
             callbacks: {
-              label: function(tooltipItem) {
-                const value = typeof tooltipItem.parsed.y === 'string' ? parseFloat(tooltipItem.parsed.y) : tooltipItem.parsed.y;
-                return new Intl.NumberFormat('pt-PT', { style: 'currency', currency: 'EUR' }).format(value);
-              }
-            }
-          }
+              label: function (tooltipItem) {
+                const value =
+                  typeof tooltipItem.parsed.y === 'string'
+                    ? parseFloat(tooltipItem.parsed.y)
+                    : tooltipItem.parsed.y;
+                return new Intl.NumberFormat('pt-PT', {
+                  style: 'currency',
+                  currency: 'EUR',
+                }).format(value);
+              },
+            },
+          },
         },
         scales: {
           y: {
             ticks: {
-              callback: function(value) {
-                // Assuming value should be a number here; parse it if it's a string
-                const numberValue = typeof value === 'string' ? parseFloat(value) : value;
-                return new Intl.NumberFormat('pt-PT', { style: 'currency', currency: 'EUR' }).format(numberValue);
-              }
-            }
-          }
-        }
-      }
+              callback: function (value) {
+                const numberValue =
+                  typeof value === 'string' ? parseFloat(value) : value;
+                return new Intl.NumberFormat('pt-PT', {
+                  style: 'currency',
+                  currency: 'EUR',
+                }).format(numberValue);
+              },
+            },
+          },
+        },
+      },
     });
   }
 
   @ViewChild('Canvas', { static: true }) element: ElementRef;
 
   ngOnInit(): void {
-    this.db
-      .list('/FATURACAO')
-      .query.once('value')
-      .then((snapshot) => {
-        const tabelas = Object.keys(snapshot.val());
+    const currentYear = new Date().getFullYear();
 
-        const totaisMensais = new Array(12).fill(0);
+    this.get.getFaturacao().subscribe((faturas: any[]) => {
+      const totaisMensais = new Array(12).fill(0);
 
-        const promises = tabelas.map((tabela) => {
-          return new Promise<void>((resolve) => {
-            this.db
-              .list(`/FATURACAO/${tabela}`)
-              .valueChanges()
-              .subscribe((faturas: any[]) => {
-                const anoAtual = new Date().getFullYear();
-                const faturasPorMes = faturas.reduce((acc, fatura) => {
-                  const data = new Date(fatura.data);
-                  if (data.getFullYear() === anoAtual) {
-                    const mes = data.getMonth();
-                    acc[mes] = (acc[mes] || 0) + fatura.valorTotal;
-                  }
-                  return acc;
-                }, []);
+      faturas.forEach((fatura) => {
+        const data = new Date(fatura.data);
+        const anoAtual = data.getFullYear();
 
-                faturasPorMes.forEach((valorMensal, indiceMes) => {
-                  totaisMensais[indiceMes] += valorMensal;
-                });
-
-                resolve();
-              });
-          });
-        });
-
-        Promise.all(promises).then(() => {
-          this.createChart(totaisMensais);
-        });
+        if (anoAtual === currentYear) {
+          const mes = data.getMonth();
+          totaisMensais[mes] += parseFloat(fatura.valorTotal);
+        }
       });
+
+      this.createChart(totaisMensais);
+    });
 
     const hoje = new Date();
     this.mesAtual = format(hoje, 'MM');

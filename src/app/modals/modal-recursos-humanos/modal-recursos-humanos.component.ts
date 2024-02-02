@@ -8,72 +8,88 @@ import { GetService } from 'src/app/services/get.service';
 import { RemoveService } from 'src/app/services/remove.service';
 import { RecursosHumanosNovaFaturaComponent } from '../modalsNovaFatura/recursos-humanos-nova-fatura/recursos-humanos-nova-fatura.component';
 import { ModalViewComponent } from '../modal-view/modal-view.component';
+import { ToastrService } from 'ngx-toastr';
 
 export interface PeriodicElement {
+  id: number;
   numeroFatura: string;
   data: string;
   empresa: string;
   valorTotal: number;
 }
 
-
 @Component({
   selector: 'app-modal-recursos-humanos',
   templateUrl: './modal-recursos-humanos.component.html',
-  styleUrls: ['./modal-recursos-humanos.component.css']
+  styleUrls: ['./modal-recursos-humanos.component.css'],
 })
 export class ModalRecursosHumanosComponent {
   displayedColumns: string[] = ['data', 'empresa', 'valorTotal', 'Action'];
   dataSource = new MatTableDataSource<PeriodicElement>();
 
+  faturacaoData: any;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
+    private toastr: ToastrService,
     private removeData: RemoveService,
     private _liveAnnouncer: LiveAnnouncer,
     public dialog: MatDialog,
     private get: GetService
   ) {}
-  ngOnInit(): void {
-    this.get.getFaturacaoRecursosHumanos().subscribe((data) => {
-      this.dataSource.data = [];
 
-      const dataArray = Object.values(data);
-
-      if (Array.isArray(dataArray)) {
-        this.dataSource.data.push(...dataArray);
-        this.dataSource.data = this.dataSource.data.slice();
-      } else {
-        console.error('Data is not an array:', data);
+  remove(element: PeriodicElement) {
+    const elementFatura = element.numeroFatura;
+    const elementKey = element.id;
+    this.removeData.deleteFaturacao(elementFatura, elementKey).subscribe(
+      () => {
+        this.toastr.success('Fatura eliminada com sucesso!', 'Sucesso');
+        this.dataSource.data = this.dataSource.data.filter(
+          (item) => item !== element
+        );
+      },
+      (error) => {
+        console.error('Error removing data from the backend:', error);
       }
-    });
+    );
+  }
+  ngOnInit(): void {
+    this.fetchFaturacaoData();
+  }
+
+  fetchFaturacaoData(): void {
+    this.get.getFaturacao().subscribe(
+      (data) => {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth() + 1;
+        const currentYear = currentDate.getFullYear();
+  
+        this.faturacaoData = data.filter((item) => {
+          const itemDate = new Date(item.data);
+          const itemMonth = itemDate.getMonth() + 1;
+          const itemYear = itemDate.getFullYear();
+  
+          return itemMonth === currentMonth && itemYear === currentYear && item.categoria === 'recursosHumanos';
+        });
+  
+        this.dataSource.data = this.faturacaoData || [];
+      },
+      (error) => {
+        console.error('Error fetching Faturacao Data:', error);
+      }
+    );
   }
 
   openView(element) {
     const dialogRef = this.dialog.open(ModalViewComponent, {
       width: '100vh',
       height: '80vh',
-      data: { element: element }
+      data: { element: element },
     });
-  
-    dialogRef.afterClosed().subscribe((result) => {
-    });
-  }
 
-  remove(element: PeriodicElement) {
-    const elementKey = element.numeroFatura;
-
-    this.removeData.RecursosHumanosREMOVE(elementKey)
-    .then(() => {
-      console.log('Data removed from Firebase:', element);
-      this.dataSource.data = this.dataSource.data.filter(
-        (item) => item !== element
-      );
-    })
-    .catch((error) => {
-      console.error('Error removing data from Firebase:', error);
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   openRecursosHumanosDialog() {
